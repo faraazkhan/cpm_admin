@@ -4,4 +4,8 @@ class Role < ActiveRecord::Base
   attr_accessible :name, :description
   validates_uniqueness_of :name
   scopify
+
+  def internal?
+    %w[Admin Support Viewer].include? self.name
+  end
 end

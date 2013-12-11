@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  rolify
+  rolify :before_add => :validate_eligibility_for_role
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     :minimum => 8,
     :message => "should be at least 8 characters long",
     :on => :create
+  #before_add_role :validate_eligibility_for_role
   search_methods :role_contains
 
   def is_admin?
@@ -33,6 +34,14 @@ class User < ActiveRecord::Base
 
   def self.role_contains(string)
     self.with_role(string)
+  end
+
+  private
+
+  def validate_eligibility_for_role(role)
+    if role.internal?
+      self.is_hp? ? true : self.errors.add(:base, "The #{role.name} is only available to internal HP users")
+    end
   end
 
 end
