@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied(exception)
-    redirect_to admin_organizations_path, :alert => exception.message
+    redirect_to access_denied_path, :alert => exception.message
+  end
+
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) ||
+      if resource.is_admin?
+        admin_dashboard_path
+      else
+        root_path
+      end
   end
 end

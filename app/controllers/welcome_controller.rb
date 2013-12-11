@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  authorize_resource
   def index
+    @user = User.first
   end
 end
