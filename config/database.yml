@@ -1,0 +1,11 @@
+common: &common
+  host: 54.200.112.112
+  database: web_db_ruby
+  username: rails
+  password: India1984!
+  adapter: sqlserver
+
+
+development:
+  <<: *common
+
