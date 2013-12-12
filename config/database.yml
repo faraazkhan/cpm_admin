@@ -1,4 +1,11 @@
-common: &common
+mysql: &mysql
+  username: rails
+  host: localhost
+  database: cpm_admin_dev
+  username: rails
+  adapter: mysql2
+
+sqlserver: &sqlserver
   host: 54.200.112.112
   database: web_db_ruby
   username: rails
@@ -6,6 +13,8 @@ common: &common
   adapter: sqlserver
 
 
+
 development:
-  <<: *common
+  <<: *mysql
+  #<<: *sqlserver
 

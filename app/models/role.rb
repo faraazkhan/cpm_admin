@@ -1,11 +1,14 @@
 class Role < ActiveRecord::Base
-  has_and_belongs_to_many :users, :join_table => :users_roles
-  belongs_to :resource, :polymorphic => true
-  attr_accessible :name, :description
-  validates_uniqueness_of :name
-  scopify
+  attr_accessible :description, :name
+  has_many :users
 
-  def internal?
-    %w[Admin Support Viewer].include? self.name
+  def to_s
+    self.name
+  end
+
+  def self.hp_only
+    %w[Admin Manager].collect do |name|
+      Role.find_by_name name
+    end
   end
 end

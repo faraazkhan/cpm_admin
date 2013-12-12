@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
-  rolify :before_add => :validate_eligibility_for_role
-  # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  belongs_to :role
+  belongs_to :client
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :disabled
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :disabled, :role_id, :client_id
   validates_uniqueness_of :email
   validates_format_of :email, with: /@/
   validates_format_of :password,
@@ -17,30 +17,40 @@ class User < ActiveRecord::Base
     :minimum => 8,
     :message => "should be at least 8 characters long",
     :on => :create
-  #before_add_role :validate_eligibility_for_role
-  search_methods :role_contains
+  validate :eligibility_for_role
+  scope :internal, where("email like ?", '%@hp.com')
+  scope :clients, where("email NOT like ?", '%@hp.com')
+  scope :all, where("id is not null")
+
+
+  def internal?
+    email.match(/(.*)\@hp\.com/)
+  end
+
+#   ***************** ROLE HELPERS ******************
+  def set_role_to(role_name)
+    update_attribute(:role_id, Role.find_by_name(role_name).id)
+  end
+
+  def has_role?(sym)
+    role.to_s.downcase == sym.to_s.downcase
+  end
 
   def is_admin?
     has_role?('Admin')
   end
 
-  def is_hp?
-    self.email.match(/(.*)hp\.com/)
-  end
-
-  def role_names
-    roles.map(&:name).join(', ')
-  end
-
-  def self.role_contains(string)
-    self.with_role(string)
-  end
-
   private
 
-  def validate_eligibility_for_role(role)
-    if role.internal?
-      self.is_hp? ? true : self.errors.add(:base, "The #{role.name} is only available to internal HP users")
+  def eligibility_for_role
+    if role
+      if Role.hp_only.include?(role)
+        self.internal? ? true : errors.add(:role_id, 'This role is only available to internal HP users')
+      else
+        self.internal? ? errors.add(:role_id, 'HP users can only be in the Admin or Manager role') : true
+      end
+    else
+      errors.add(:role_id, "can't be blank")
     end
   end
 

@@ -1,8 +1,13 @@
 <%= semantic_form_for [:admin, @user] do |f| %>
-  <%= f.inputs :name %>
-  <%= f.inputs :roles %>
-  <%= f.inputs :password %>
-  <%= f.inputs :password_confirmation %>
+  <%= f.inputs "User" do %>
+    <%= f.input :name %>
+    <%= f.input :role %>
+    <%= f.input :email, :input_html => { :disabled => true } %>
+  <% end %>
+  <%= f.inputs "Password" do %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+  <% end %>
 
   <%= f.actions do %>
     <%= f.action :submit %>

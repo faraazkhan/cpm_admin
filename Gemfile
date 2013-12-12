@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.16'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -8,13 +8,13 @@ group :assets do
 end
 gem 'devise'
 gem 'cancan'
-gem 'rolify'
 gem 'activeadmin'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'activerecord-sqlserver-adapter'
 gem 'tiny_tds'
 gem 'debugger', :group => :development
+gem 'mysql2', :group => :development
 
 
 # To use ActiveModel has_secure_password
