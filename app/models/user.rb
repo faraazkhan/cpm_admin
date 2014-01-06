@@ -1,13 +1,13 @@
 class User < ActiveRecord::Base
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
   belongs_to :role
   belongs_to :client
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :disabled, :role_id, :client_id, :status
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :disabled, :role_id, :client_id, :status, :approved
   validates_uniqueness_of :email
+  validates_presence_of :name
   validates_format_of :email, with: /@/
   validates_format_of :password,
     :with => /(?=^.{8,25}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   scope :active, where("status = 'Active'")
   scope :locked, where("status = 'Locked'")
   before_save :calculate_status
+  before_create :identify_role_and_client
 
 
   def internal?
@@ -46,6 +47,17 @@ class User < ActiveRecord::Base
     has_role?('Admin')
   end
 
+  def status_color
+    case self.status
+    when 'Active'
+      :green
+    when 'Locked'
+      :red
+    when 'Pending'
+      :orange
+    end
+  end
+
   private
 
   def eligibility_for_role
@@ -56,20 +68,30 @@ class User < ActiveRecord::Base
         self.internal? ? errors.add(:role_id, 'HP users can only be in the Admin or Manager role') : true
       end
     else
-      errors.add(:role_id, "can't be blank")
+      errors.add(:role_id, "can't be blank") unless self.new_record?
     end
   end
 
   def calculate_status
     if self.new_record?
-      self.status = is_internal? ?  'Active' : 'Pending'
+      self.status = internal? ?  'Active' : 'Pending'
     elsif self.locked_at_changed?
       self.status = 'Locked' if self.locked_at #update status to locked when account is locked
-      if (self.access_approved? || self.internal?) #update status to either 'Active' or 'Pending' when account is unlocked
+      if (self.approved? || self.internal?) #update status to either 'Active' or 'Pending' when account is unlocked
         self.status = 'Active'
       else
         self.status = 'Pending'
       end
+    end
+  end
+
+  def identify_role_and_client
+    if internal?
+      self.approved = true
+      self.role_id = Role.find_by_name('Manager').id
+    else
+      self.role_id = Role.find_by_name('Client').id
+      self.client_id = Client.for(self).try(:id)
     end
   end
 

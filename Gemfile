@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'activerecord-sqlserver-adapter'
 gem 'tiny_tds'
+gem 'unicorn'
 group :development do
   gem 'debugger'
   gem 'mysql2'
@@ -20,20 +21,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'lol_dba'
+  gem 'irbtools'
+  gem 'irbtools-more'
+  gem 'terminal-notifier'
 end
-
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

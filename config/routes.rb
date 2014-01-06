@@ -1,4 +1,6 @@
 CpmAdmin::Application.routes.draw do
+  get "users_controller/approve"
+
   root to: "admin/dashboard#index"
   ActiveAdmin.routes(self)
   devise_for :users

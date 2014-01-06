@@ -14,11 +14,12 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel "Recent User Requests" do
-          table_for(User.last(5)) do
+          table_for(User.pending) do
             column("Name")   {|user| link_to user.name, admin_user_path(user) }
             column :email
+            column("Client") {|user| link_to user.client, admin_client_path(user.client)}
             column("Request Received On") { |user| formatted_date(user.created_at) }
-            column("Status") { |user| status_tag('active', :ok) }
+            column("Status") { |user| status_tag(user.status, user.status_color) }
           end
         end
       end

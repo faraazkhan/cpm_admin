@@ -21,7 +21,7 @@ ActiveAdmin.register Client do
       f.actions
     end
 
-  show do 
+  show do
     attributes_table do
       row :name
     end
