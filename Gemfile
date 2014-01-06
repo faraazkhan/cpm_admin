@@ -13,8 +13,14 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'activerecord-sqlserver-adapter'
 gem 'tiny_tds'
-gem 'debugger', :group => :development
-gem 'mysql2', :group => :development
+group :development do
+  gem 'debugger'
+  gem 'mysql2'
+  gem 'meta_request'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'lol_dba'
+end
 
 
 # To use ActiveModel has_secure_password

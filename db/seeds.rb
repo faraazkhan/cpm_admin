@@ -37,9 +37,11 @@ end
 
 User.delete_all
 admin = User.create!(:name => 'CPM Administrator', :email => 'cpm_admin@hp.com', :password => 'Admin123', :password_confirmation => 'Admin123', :role_id => Role.find_by_name('Admin').id)
-client = User.create!(:name => 'Faraaz Khan', :email => 'faraaz@myclient.com', :password => 'Client123', :password_confirmation => 'Client123', :role_id => Role.find_by_name('Client').id, :client_id => Client.find_by_name('MyClient').id)
+client = User.create!(:name => 'CPM Client', :email => 'client@myclient.com', :password => 'Client123', :password_confirmation => 'Client123', :role_id => Role.find_by_name('Client').id, :client_id => Client.find_by_name('MyClient').id)
+manager = User.create!(:name => 'CPM Manager', :email => 'cpm_manager@hp.com', :password => 'Manager123', :password_confirmation => 'Manager123', :role_id => Role.find_by_name('Manager').id)
 
-admin.confirmed_at = client.confirmed_at = Time.now
+admin.confirmed_at = client.confirmed_at = manager.confirmed_at =  Time.now
 admin.save!
 client.save!
+manager.save!
 

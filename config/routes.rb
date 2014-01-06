@@ -1,5 +1,5 @@
 CpmAdmin::Application.routes.draw do
-  root :to => 'welcome#index'
+  root to: "admin/dashboard#index"
   ActiveAdmin.routes(self)
   devise_for :users
 

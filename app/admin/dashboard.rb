@@ -17,15 +17,18 @@ ActiveAdmin.register_page "Dashboard" do
           table_for(User.last(5)) do
             column("Name")   {|user| link_to user.name, admin_user_path(user) }
             column :email
-            column("Request Received On") { |user| user.created_at.to_date.strftime('%m/%d/%Y') }
+            column("Request Received On") { |user| formatted_date(user.created_at) }
             column("Status") { |user| status_tag('active', :ok) }
           end
         end
       end
 
       column do
-        panel "Info" do
-          para "Welcome to ActiveAdmin."
+        panel "New Clients" do
+          table_for(Client.last(10)) do
+            column("Name") { |client| link_to client.name, admin_client_path(client) }
+            column("Added On") { |client| formatted_date(client.created_at) }
+          end
         end
       end
 

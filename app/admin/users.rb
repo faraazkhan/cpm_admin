@@ -1,11 +1,15 @@
 ActiveAdmin.register User do
+  # Clickable scopes on index views
   scope :internal
   scope :clients
   scope :all
+
+  # Search options available in the Sidebar
   filter :name_or_email, :as => :string
   filter :name
   filter :email
-  #filter :role, :as => :string #see def self.by_role_contains in app/models/user.rb
+
+  # Customize the Index page
   index do
     column 'Name' do |user|
       link_to user.name, admin_user_path(user)
@@ -14,13 +18,15 @@ ActiveAdmin.register User do
     column :role
   end
 
+  # Customize the new and edit forms
   form :partial => "form" #see app/views/admin/_form.html.erb
+
+  # Customize the detail/show page
   show do
     attributes_table do
       row :name
       row :email
       row("Role") { |r| r.role }
     end
-    #render "show" # see app/views/admin/_show.html.erb
   end
 end
