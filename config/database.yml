@@ -17,4 +17,6 @@ sqlserver: &sqlserver
 development:
   <<: *mysql
   #<<: *sqlserver
+test:
+  <<: *mysql
 

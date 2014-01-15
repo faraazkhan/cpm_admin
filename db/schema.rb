@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140106045202) do
+ActiveRecord::Schema.define(:version => 20140112211641) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20140106045202) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.boolean  "approved",               :default => false
+    t.boolean  "disabled",               :default => false
   end
 
   add_index "users", ["client_id"], :name => "index_users_on_client_id"
@@ -81,5 +82,39 @@ ActiveRecord::Schema.define(:version => 20140106045202) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["role_id"], :name => "index_users_on_role_id"
+
+  create_table "versions", :force => true do |t|
+    t.string   "item_type",      :null => false
+    t.integer  "item_id",        :null => false
+    t.string   "event",          :null => false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+    t.text     "object_changes"
+  end
+
+  add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "vw_cfgParamsDW", :force => true do |t|
+    t.string "client_id"
+    t.string "enableCM"
+    t.string "enablePM"
+    t.string "enableDB"
+    t.string "enableVM"
+    t.string "sasGroup"
+    t.string "clientShortName"
+    t.string "clientLongName"
+    t.string "rptrID"
+    t.string "rptrGroup"
+    t.string "rptrGroupVM"
+    t.string "rptrName"
+    t.string "rptrIP"
+    t.string "rptrPort"
+    t.string "rptrLogin"
+    t.string "rptrPass"
+    t.string "rptrDB"
+    t.string "loadGroup"
+    t.string "config_parameter_id"
+  end
 
 end

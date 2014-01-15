@@ -3,13 +3,6 @@ ActiveAdmin.register_page "Dashboard" do
   menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
-    #div :class => "blank_slate_container", :id => "dashboard_default_message" do
-    #span :class => "blank_slate" do
-    #span I18n.t("active_admin.dashboard_welcome.welcome")
-    #small I18n.t("active_admin.dashboard_welcome.call_to_action")
-    #end
-    #end
-
     columns do
 
       column do
@@ -34,7 +27,25 @@ ActiveAdmin.register_page "Dashboard" do
       end
 
     end # columns
+=begin
+Activity Log:
+  What are we auditing:   All changes to the User Table, All editable screens
+  What do we want to see: Show history on the detail page + Change Log of all changes in the system chronology (most recent 100) configurable
+  What do we want to do:  Search the change log
+=end
+    #section "Recent activity" do
+  #table_for PaperTrail::Version.order('id desc').limit(20) do # Use PaperTrail::Version if this throws an error
+    #column "Name" do |v| 'Name' end
+    ## column "Item" do |v| link_to v.item, [:admin, v.item] end # Uncomment to display as link
+    #column "Email" do |v| 'Email' end
+    #column "Role" do |v| "role"end
+    #column "Client" do |v| 'Client Name' end
+    #column "Status" do |v| 'Status' end
+    #column "Updated By" do |v| 'Faraaz Khan' end
+  #end
+#end
 
   end # content
+
 end # dashboard
 

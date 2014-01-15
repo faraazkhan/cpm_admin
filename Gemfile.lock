@@ -169,6 +169,9 @@ GEM
     ori (0.1.0)
     orm_adapter (0.5.0)
     paint (0.8.6)
+    paper_trail (3.0.0)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
@@ -257,6 +260,7 @@ DEPENDENCIES
   lol_dba
   meta_request
   mysql2
+  paper_trail (~> 3.0.0)
   rails (= 3.2.16)
   sass-rails (~> 3.2.3)
   terminal-notifier

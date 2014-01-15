@@ -1,5 +1,5 @@
 ActiveAdmin.register Client do
-  # Search options available in the Sidebar
+ # Search options available in the Sidebar
   filter :name
   index do
     column 'Name' do |client|
@@ -34,6 +34,5 @@ ActiveAdmin.register Client do
       end
     end
   end
-
 end
 

@@ -11,10 +11,15 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     stored_location_for(resource) ||
-      if resource.is_admin?
-        admin_dashboard_path
-      else
-        root_path
-      end
+    if resource.is_admin?
+      admin_dashboard_path
+    else
+      client_landing_path
+    end
+  end
+
+  protected
+  def user_for_paper_trail
+    user_signed_in? ? current_user : 'Unknown user'
   end
 end

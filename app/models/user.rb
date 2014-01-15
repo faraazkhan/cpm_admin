@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_paper_trail
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
   belongs_to :role
@@ -12,11 +13,11 @@ class User < ActiveRecord::Base
   validates_format_of :password,
     :with => /(?=^.{8,25}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
     :message => "Password should contain: 1 Upper Letter, 1 number, between 8 to 25 characters",
-    :on => :create
+    :on => :create, :if => :enforce_password_requirement
   validates_length_of :password,
     :minimum => 8,
     :message => "should be at least 8 characters long",
-    :on => :create
+    :on => :create, :if => :enforce_password_requirement
   validate :eligibility_for_role
 
   #Scopes #TODO: make these class methods
@@ -26,7 +27,7 @@ class User < ActiveRecord::Base
   scope :pending, where("status = 'Pending'")
   scope :active, where("status = 'Active'")
   scope :locked, where("status = 'Locked'")
-  before_save :calculate_status
+  before_save :set_status
   before_create :identify_role_and_client
 
 
@@ -34,7 +35,7 @@ class User < ActiveRecord::Base
     email.match(/(.*)\@hp\.com/)
   end
 
-#   ***************** ROLE HELPERS ******************
+  #   ***************** ROLE HELPERS ******************
   def set_role_to(role_name)
     update_attribute(:role_id, Role.find_by_name(role_name).id)
   end
@@ -58,6 +59,42 @@ class User < ActiveRecord::Base
     end
   end
 
+  def approve!
+    self.approved = true
+    self.save!
+  end
+
+  def reject!
+    self.destroy
+  end
+
+  def disable!
+    self.disabled = true
+    self.save!
+  end
+
+  def enable!
+    self.disabled = false
+    self.save!
+  end
+
+  def unlock!
+    self.locked_at = nil
+    self.save!
+  end
+
+  def locked?
+    locked_at.present?
+  end
+
+  def admin_approved?
+    internal? || approved?
+  end
+
+  def active?
+    status == 'Active'
+  end
+
   private
 
   def eligibility_for_role
@@ -72,27 +109,39 @@ class User < ActiveRecord::Base
     end
   end
 
-  def calculate_status
-    if self.new_record?
-      self.status = internal? ?  'Active' : 'Pending'
-    elsif self.locked_at_changed?
-      self.status = 'Locked' if self.locked_at #update status to locked when account is locked
-      if (self.approved? || self.internal?) #update status to either 'Active' or 'Pending' when account is unlocked
-        self.status = 'Active'
-      else
-        self.status = 'Pending'
-      end
-    end
+  def set_status
+    puts 'Called Set Status'
+    self.status = calculate_status
   end
+
+  def calculate_status
+    #Unconfirmed: Waiting on user to confirm email access. Show message. No admin action required
+    #Pending: Waiting for admin approval. Show message saying the same (Approve/Deny)
+    #Active: They have intended access
+    #Locked: Account locked. Admin must unlock. Show message. Create admin section for all locked account. Admin should be able to unlock
+    #Disabled: Black List; also used for disabled/deactivated accounts. Admin can approve/remove users from here as well.
+    return 'Unconfirmed' unless confirmed_at
+    return 'Locked' if locked?
+    return 'Disabled' if disabled?
+    return 'Pending' unless admin_approved?
+    'Active'
+  end
+
+
+
 
   def identify_role_and_client
     if internal?
       self.approved = true
-      self.role_id = Role.find_by_name('Manager').id
+      self.role_id = Role.find_by_name('Manager').id unless self.role
     else
       self.role_id = Role.find_by_name('Client').id
       self.client_id = Client.for(self).try(:id)
     end
+  end
+
+  def enforce_password_requirement
+    false
   end
 
 end
