@@ -1,8 +1,10 @@
 panel "Change History" do
-  table_for filtered_versions do
+  table_for versions do
     column("Time Stamp") { |version| formatted_time(version.created_at) }
-    column("Event") {|version| version.event }
-    column("Performed By") {|version| raw whodunnit_user(version.whodunnit) }
-    column("Changes") { |version| raw(formatted_changeset(version.changeset, 'name')) }
+    column("Performed By") {|version| (version.performed_by_name) }
+    column :item_id
+    column :item_attribute
+    column :previous_value
+    column :new_value
   end
 end

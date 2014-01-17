@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
   belongs_to :role
   belongs_to :client
+  has_many :audit_logs, :as => :item
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :disabled, :role_id, :client_id, :status, :approved
@@ -27,7 +28,7 @@ class User < ActiveRecord::Base
   scope :pending, where("status = 'Pending'")
   scope :active, where("status = 'Active'")
   scope :locked, where("status = 'Locked'")
-  before_save :set_status
+  before_save :set_status, :update_audit_log
   before_create :identify_role_and_client
 
 
@@ -95,6 +96,10 @@ class User < ActiveRecord::Base
     status == 'Active'
   end
 
+  def audits
+    self.audit_logs
+  end
+
   private
 
   def eligibility_for_role
@@ -142,6 +147,20 @@ class User < ActiveRecord::Base
 
   def enforce_password_requirement
     false
+  end
+
+  def update_audit_log
+    if self.changed?
+      self.attributes.each do |attr, value|
+        method = "#{attr}_changed?".to_sym
+        change = self.send(method)
+        change_method = "#{attr}_change".to_sym
+        old_value, new_value = self.send(change_method)
+        if change
+          AuditLog.create(:item_type => 'User', :item_id => self.id, :item_attribute => attr, :previous_value => old_value, :new_value => new_value, :performed_by => User.last.id, :created_at => Time.now)
+        end
+      end
+    end
   end
 
 end

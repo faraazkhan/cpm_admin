@@ -75,15 +75,7 @@ ActiveAdmin.register User do
 
   member_action :history do
     @user= User.find(params[:id])
-    @versions = @user.versions
-    render "layouts/history"
-  end
-
-  member_action :search_history do
-    @user = User.find(params[:id])
-    @search_term = 'name'
-    @versions = @user.versions
-    @filtered_versions = @versions.select {|v| v.changeset.keys.include?(@search_term) }
+    @versions = @user.audits
     render "layouts/filtered_history"
   end
 
