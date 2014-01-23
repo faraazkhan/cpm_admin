@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140117200300) do
+ActiveRecord::Schema.define(:version => 20140123040533) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -40,8 +40,25 @@ ActiveRecord::Schema.define(:version => 20140117200300) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "short_name"
+    t.string   "long_name"
+    t.text     "notes"
+    t.string   "sas_group",              :limit => 11
+    t.boolean  "capacity_enabled"
+    t.boolean  "performance_enabled"
+    t.boolean  "health_check_enabled"
+    t.boolean  "oracle_enabled"
+    t.boolean  "sql_enabled"
+    t.boolean  "virtualization_enabled"
+    t.string   "reference_url"
+    t.string   "logo"
+    t.string   "project_manager_email"
+    t.string   "account_manager_email"
+    t.string   "capacity_manager_email"
+    t.string   "onboarded_by_email"
+    t.string   "status"
   end
 
   create_table "domains", :force => true do |t|
@@ -52,6 +69,18 @@ ActiveRecord::Schema.define(:version => 20140117200300) do
   end
 
   add_index "domains", ["client_id"], :name => "index_domains_on_client_id"
+
+  create_table "reporters", :force => true do |t|
+    t.string   "name"
+    t.string   "ip"
+    t.integer  "port"
+    t.string   "login"
+    t.string   "password"
+    t.string   "database_name"
+    t.integer  "load_group"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
