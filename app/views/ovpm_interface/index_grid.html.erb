@@ -1,0 +1,118 @@
+<html>
+<head>
+	<title>ActiveWidgets Examples</title>
+	<style>body {font: 12px Tahoma}</style>
+
+<!-- include links to the script and stylesheet files -->
+	<script src="/runtime/lib/aw.js"></script>
+	<link href="/runtime/styles/xp/aw.css" rel="stylesheet"></link>
+
+<!-- change default styles, set control size and position -->
+<style>
+
+html	{ width: 100%; height: 100%; margin: 0px; padding: 0px;}
+body	{ width: 100%; height: 100% ;margin: 0px; padding: 0px;}
+
+#myGrid {width: 674px; height:410px;}
+#myGrid .aw-alternate-even {background: #eee;}
+#myGrid .aw-row-selector {width: 20px; text-align: center}
+#myGrid .aw-mouseover-row {background: #ccc;} 
+#myGrid .aw-mousedown-row {background: #999;} 
+
+
+
+#myGrid .aw-grid-headers {color: blue}
+#myGrid .aw-grid-headers .aw-column-0 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-1 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-2 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-3 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-4 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-5 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-6 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-7 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-8 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-9 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-10 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-11 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-12 {font-weight: bold;text-align: center}
+#myGrid .aw-grid-headers .aw-column-13 {font-weight: bold;text-align: center}
+
+	
+	#myGrid .aw-column-0 {width: 90px; border-right: 1px dotted #ccc}
+	#myGrid .aw-column-1 {width: 180px; border-right: 1px dotted #ccc}
+	#myGrid .aw-column-2 {width: 80px; border-right: 1px dotted #ccc}
+	#myGrid .aw-column-3 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-4 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-5 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-6 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-7 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-8 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-9 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-10 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-11 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-12 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	#myGrid .aw-column-13 {width: 80px;border-right: 1px dotted #ccc;text-align: right}
+	
+	#myGrid .aw-row-selector {width: 35px; text-align: center}
+	#myGrid .aw-mouseover-row .aw-row-selector {color: red;}
+
+	/*	Highlight on mouseover, mousedown */
+	#myGrid .aw-mouseover-selector {background: blue; color: white}
+
+</style>
+</head>
+<body onbeforeunload='busyBox.Show();>
+<script language="javascript" src="/javascripts/CastleBusyBox.js"></script>
+                            <iframe id="BusyBoxIFrame" name="BusyBoxIFrame" frameBorder="0" scrolling="no" ondrop="return false;">
+                      </iframe>
+                      <script language="JavaScript">
+                            var busyBox = new BusyBox("BusyBoxIFrame", "busyBox", 4, "/images/gears_ani_", ".gif", 125, 308, 172, "/BusyBox.htm");
+                       </script>
+	
+	<span id="myGrid"></span>
+
+	
+
+<!-- create controls -->
+<script>
+    var alternate = function(){
+  		return this.getRowProperty("order") % 2 ? "#fcfaf6" : "#ffffff";
+	} 
+	<% @indline = 0%>
+	var myData = [<% for line in @strlist %>['<%= line.netid || ''%>',"<%= line.host_name || '' %>","<%= line.fs_mountpointname.sub(/[\\]/, '*')  || '' %>","<%= line.start_used || ''%>","<%= line.start_date.strftime("%b/%d/%Y") || ''%>","<%= line.FS_TOTAL || ''%>","<%= line.FS_USED || ''%>","<%= line.FS_FREE || ''%>","<%= line.fs_usedpct || ''%>","<%= line.filldays || ''%>"]<% if @indline < @strlist.length - 1 %><%= "," %><% else %><%= "]" %><% end %><%@indline = @indline + 1 %><% end %> 
+	
+	var string = new AW.Formats.String;
+    var number = new AW.Formats.Number;
+    var date = new AW.Formats.Date;
+
+    number.setTextFormat("#,###.##");
+    date.setDataFormat("ISO8601");
+    date.setTextFormat("mmm d, yyyy");
+	
+	var numrows = 100
+	//var grid = new AW.UI.Grid;
+	var grid = new AW.Grid.Extended;
+	grid.setId("myGrid");
+	grid.setSelectorVisible(true);
+	grid.setSelectorText(function(i){return this.getRowPosition(i)+1});
+	grid.setFixedLeft(2);	// number of fixed columns on the left side
+
+    grid.setHeaderText(["Group Name","Host Name","File System","Start Used","Start Date","Fs Total","FS Used","FS Free","FS Used PCT","Fill Days"]);
+    grid.setCellFormat([string, string, string, number, date, number, number, number, number, number]);
+//	grid.setCellText(function(col, row){return col + "-" + row});
+	grid.setCellText(function(i,j){return myData[j][i]});
+	grid.setColumnCount(10);
+	grid.setTopText("ID");
+	<% @indline = 0 %><% for line in @strlist %><% if line.COLOR != "G"%><% if line.COLOR == "Y"%>grid.getCellTemplate(8,<%= @indline %>).setStyle("background", "Yellow");<% else %>grid.getCellTemplate(8,<%= @indline %>).setStyle("background", "Red");<% end %><% end %><% if line.fdcolor != "G"%><% if line.fdcolor == "Y"%>grid.getCellTemplate(9,<%= @indline %>).setStyle("background", "Yellow");<% else %>grid.getCellTemplate(9,<%= @indline %>).setStyle("background", "Red");<% end %><% end %><% @indline = @indline + 1%><% end%>   
+	grid.setRowCount(<%= @strlist.length %>);
+	grid.refresh();
+
+</script>
+<script language="javascript" src="/javascripts/CastleBusyBox.js"></script>
+                <iframe id="BusyBoxIFrame" name="BusyBoxIFrame" frameBorder="0" scrolling="no" ondrop="return false;">
+                </iframe>
+                <script language="JavaScript">
+                           var busyBox = new BusyBox("BusyBoxIFrame", "busyBox", 4, "/images/gears_ani_", ".gif", 125, 308, 172, "/BusyBox.htm");
+                </script>
+</body>
+</html>

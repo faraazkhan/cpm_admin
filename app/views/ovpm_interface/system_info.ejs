@@ -1,0 +1,15 @@
+#page.replace_html 'servername' , '<b>System_Info</b>'
+page.GetGraph.action = @system_info_link
+  page.hide'performance_metrics'
+  page.hide 'type_report_performance'
+  page.hide 'capacity_metrics'
+  page.hide 'type_report_capacity'
+  page.hide 'storage_capacity'
+  page.show 'type_report_system'
+  page.show 'system_metrics'
+  page.hide 'storage_metrics'
+  page.hide  'storage_select_box'
+  page.hide 'NumFileSystems'
+  page.hide 'storage_performance'
+  page.hide 'storage_perf_metrics'
+  page.GetGraph.submit()

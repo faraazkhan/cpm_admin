@@ -1,0 +1,8 @@
+<% if @internal %>
+  rendering internal view
+  <%= render 'internal' %>
+<% else %>
+  rendering clients view
+  <%= render 'client' %>
+<% end %>
+<%= link_to 'Logout', destroy_user_session_path, :method => :delete %>

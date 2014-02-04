@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     has_role?('Admin')
   end
 
+  def is_client?
+    has_role?('Client')
+  end
+
   def status_color
     case self.status
     when 'Active'

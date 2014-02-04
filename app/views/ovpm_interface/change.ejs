@@ -1,0 +1,17 @@
+page.replace_html 'time_updated' , Time.now.to_s
+page.visual_effect :shake, 'time_updated'
+page.insert_html :top, 'the_list' , '<li>King of the Hill</li>'
+page.visual_effect :highlight, 'the_list'
+page.show 'initially_hidden'
+
+
+page.delay(3) do
+  page.alert @rails_version
+end
+
+page.delay(3) do
+  page.visual_effect :highlight, 'admin'
+end
+
+
+page.remove 'item_to_remove'

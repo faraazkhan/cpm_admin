@@ -1,0 +1,31 @@
+<table width="200" border="0"><tr bgcolor="#CCCCCC">
+    <td>
+        <div align="center" class="style12">
+            <%= link_to_remote "Close Data",{:update => 'graph_' + @getserver,:loading => "busyBox.Show()",
+                        				:complete => "busyBox.Hide()",:url => {:action => :clear_div}},:href => "#graph_" + @getserver %> 
+        </div>
+     </td></tr>
+</table>                        				
+<table border='0'>
+<tr bgcolor='#CCCCCC'><th><span class='style13'><%=@getserver%><br><%=@xtitle%></span></th>
+<% @metrics_avalables.each do |m| %>
+    <th><span class='style13'><%= m.name%></span></th>
+<% end %>    
+</tr>
+ <% @datalist.each do |d| %>
+    <% if d.hour < 10
+           hourtoin = "0" + d.hour.to_s + ":00"
+       else 
+           hourtoin = d.hour.to_s + ":00"
+       end  
+      dateput = d.month.to_s + "/" + d.day.to_s + "/" + d.year.to_s + " " + hourtoin %>
+    <tr bgcolor='#EAEAEA'><td><span class='style12'><%= dateput %></span></td>
+    <% @metrics_avalables.each do |m| %>
+        <td><span class='style12'><%= d[m.name] %></span></td>
+    
+    <% end %>
+        </tr>
+    
+ <% end %>
+</table>
+

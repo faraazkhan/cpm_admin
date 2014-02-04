@@ -1,0 +1,102 @@
+<br><br></bnr>  
+<div id="add_note_<%= @getserver %>"></div>
+<table border="0"><tr bgcolor="#CCCCCC">
+     	<td>
+        <div align="center" class="style12">
+            <%= link_to_remote "Close Notes",{:update => 'note_' + @getserver,:loading => "busyBox.Show()",
+                        				:complete => "busyBox.Hide()",:url => {:action => :clear_div}},:href => "#note_" + @getserver %> 
+        </div>
+     </td>
+	 </tr>
+</table>   
+
+<% if @notes.size == 0%>
+	
+	<table width="200" border='0'>
+		<% if @att_notes %>
+    	<tr tr bgcolor='#CCCCCC'>
+			<td class='style13'>
+				<div align="center" class="style12"><%= link_to_remote "Add new note",{:update => 'add_note_' + @getserver,:loading => "busyBox.Show()",
+                        				:complete => "busyBox.Hide()",:url => {:action => :add_note,:getserver=>@cserver}},:href => "#note_" + @getserver %>
+				</div>
+			</td>
+		</tr>
+	<% end %>	
+	</table>
+	
+	<br>    
+<% else %>	
+	<br>
+	<b><span class='style13'><%= @notes.size %> - <% if @notes.size == 1 %>Note<% else  %>Notes<% end %> Available for <%= @getserver %> </span></b><br><br>
+	
+	<table border='0'>
+		<% if @att_notes %>
+		<tr>
+			<th>
+				<div align="center" class="style12"><%= link_to_remote "Add Note",{:update => 'add_note_'  + @getserver,:loading => "busyBox.Show()",
+                        				:complete => "busyBox.Hide()",:url => {:action => :add_note,:getserver=>@cserver}},:href => "#add_note_" + @getserver %>
+				</div>
+			</th>
+		</tr>
+		<% end %>
+    	<tr bgcolor='#CCCCCC'>
+    		<th>
+    			<span class='style13'>Created By</span>
+			</th>
+			<th>
+    			<span class='style13'>Effective_Date</span>
+			</th>
+			<th>
+				<span class='style13'>Note</span>
+			</th>
+			<% if @att_notes %>
+			<th>
+    			<span class='style13'>Action</span>
+			</th>
+			<% end %>
+		</tr>
+		<% @notes.each do |n| %>
+			 	 <tr bgcolor='#EAEAEA'>
+    		<td>
+    			<span class='style12'><%= User.find(n.user_id).name %></span>
+			</td>
+			<td>
+    			<span class='style12'><%= n.date_ref.strftime("%m-%d-%Y") %></span>
+			</td>
+			<td width = "410">
+				<span class='style12'><%= n.note_body%></span>
+			</td>
+			<% if @att_notes %>
+			<td><% if @user.id == n.user_id or @notes_admin %>
+    			<span class='style12'>
+    				<div align="center" class="style12">
+    					<%= link_to_remote "Edit",{:update => 'add_note_' + @getserver,:loading => "busyBox.Show()",
+                        				:complete => "busyBox.Hide()",:url => {:action => :edit_note,:note_id=>n.id}},:href => "#note_" + @getserver %>
+						<br>				
+						<%= link_to_remote "Delete",{:update => 'note_' + @getserver,:loading => "busyBox.Show()",
+                        				:complete => "busyBox.Hide()",:confirm => 'Are you going to delete this note ?', :url => {:action => :delete_note,:note_id=>n.id}},:href => "#note_" + @getserver %>
+						
+				</div>
+    			</span>
+				<% end %>
+			</td>
+			<% end %>
+		</tr>
+		
+		<% end %>
+		<tr>
+			<% if @att_notes %><th></th><th></th><th></th><% end %>
+			<th>
+        		<div align="center" class="style12">
+            		<%= link_to_remote "Close Notes",{:update => 'note_' + @getserver,:loading => "busyBox.Show()",
+                        				:complete => "busyBox.Hide()",:url => {:action => :clear_div}},:href => "#note_" + @getserver %> 
+        		</div>
+     		</th>
+	 </tr>
+	</table>
+	
+<% end%>
+
+<br>
+
+

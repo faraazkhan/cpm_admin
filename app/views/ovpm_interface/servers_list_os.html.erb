@@ -1,0 +1,32 @@
+  <select name="GetServer[]" id="GetServer" size="20" class="styledrop" multiple onchange="this.form.submit()">
+                        <% if @servers %>
+                            <% @first = true%>
+                            <% for system in @servers %>
+                                <% @namd = system.systemid %>
+                                
+                                <% if @server_aliases %>
+                                    <% if Serveralias.get_alias(system.systemid).length > 0 %>
+                                        <% @alias = Serveralias.get_alias(system.systemid)[0].Alias %>
+                                    <% else %>
+                                        <% @alias = system.systemid %>
+                                    <% end %>
+                                <% else %>    
+                                    <% @alias = system.systemid %>
+                                <% end %>     
+                                
+                                <%if @first %>
+                                    <option title="<%= system.systemid %>" value="<%= system.systemid %>" selected><%= @alias %></option>    
+                                    <% @first = false%>
+                                <% else %>
+                                    <option title="<%= system.systemid %>" value="<%= system.systemid %>" ><%= @alias %></option>    
+                                <% end %>    
+                           <% end %>   
+                        <% else %>  
+                                <option value="No" >No Servers</option>
+                        <% end %>
+                    </select>
+ <br>
+ <div align="center" class="style6"><%= @servers.length%> Servers </div>
+ <SCRIPT language=javascript type=text/javascript>
+  document.GetGraph.submit();
+ </script>

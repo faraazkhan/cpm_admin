@@ -1,0 +1,5 @@
+<%= error_messages_for @note %>
+
+<%= form_tag(:update => "note_" + @getserver,:url => {:action => :save_note}) do %>
+	<%= render :partial => 'note' %>
+<% end %>	

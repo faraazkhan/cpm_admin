@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140123040533) do
+ActiveRecord::Schema.define(:version => 20140123042113) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(:version => 20140123040533) do
     t.string   "status"
   end
 
+  create_table "clients_reporters", :force => true do |t|
+    t.integer  "client_id"
+    t.integer  "reporter_id"
+    t.datetime "created_at"
+    t.string   "reporter_group_cpm"
+    t.string   "reporter_group_vmw"
+    t.string   "reporter_group_sql"
+    t.string   "reporter_group_ora"
+  end
+
   create_table "domains", :force => true do |t|
     t.string   "name"
     t.integer  "client_id"
@@ -80,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20140123040533) do
     t.integer  "load_group"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "reporter_num"
   end
 
   create_table "roles", :force => true do |t|

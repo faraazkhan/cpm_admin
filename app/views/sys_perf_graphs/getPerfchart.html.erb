@@ -1,0 +1,14 @@
+<div align="left"><% if !@nometric %>
+  <table width="200" border="0"><tr bgcolor="#CCCCCC"><td><div align="center" class="style12">
+          <%= link_to_remote "Data",{:update => 'graph_' + @getserver,:loading => "busyBox.Show()",
+                                     :complete => "busyBox.Hide()",:url => {:action => :perfdata, :getserver => @cserver }},:href => "#graph_" + @getserver %> 
+                               </div></td>
+                                 <!-- <td><div align="center" class="style12"> 
+                               </tr>
+                             </table>
+                           <% end %>
+                           </div><div id="<%= 'graph_' + @getserver %>"></div>
+                           <div id="<%= 'note_' + @getserver %>"></div>
+                           <%= image_tag(@imgpath, :border=>0, :id=>@getserver + '_' + @namefile, :name=>@getserver + '_' + @namefile, :usemap=>"#" + @getserver + '_map') %>
+                           <br>
+                           <br>

@@ -1,0 +1,13 @@
+<%= error_messages_for @note %>
+
+<%= form_tag(:update => "note_" + @getserver,:url => {:action => :update_note}) %>
+	<input id="id" type="hidden" name="id" value="<%= @note.id %>"/>
+	<input id="note_id" type="hidden" name="note[id]" value="<%=@note.id%>"/>
+	<input id="note_systemid" type="hidden" name="note[systemid]" value="<%= @note.systemid %>"/>
+	<input id="note_user_id" type="hidden" name="note[user_id]" value="<%= @note.user_id %>"/>
+	<input id="note_client_group" type="hidden" name="note[client_group]" value="<%= @note.client_group %>"/>
+	<input id="note_date_note" type="hidden" name="note[date_note]" value="<%= @note.date_note %>"/>
+	
+	
+	<%= render :partial => 'note' %>	
+<%= end %>	

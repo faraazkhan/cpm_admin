@@ -1,4 +1,4 @@
 class ClientsController < ApplicationController
-  def landing
+  def home
   end
 end

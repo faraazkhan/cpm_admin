@@ -1,0 +1,29 @@
+<input id="note_systemid" type="hidden" name="note[systemid]" value="<%= @getserver %>"/>
+<input id="note_type_note" type="hidden" name="note[type_note]" value="performance"/>
+
+
+<table border='0'>
+    	<tr bgcolor='#CCCCCC'>
+    		<th><span class='style12'>Action Date:</span></th>
+			<td><%= calendar_date_select_tag "note[date_ref]",@note.date_ref  %></td>
+    	<tr>	
+    	<tr bgcolor='#CCCCCC'>
+    		<th>
+    			<span class='style13'>
+    				<div align="center" class="style12">Note:</div>
+				</span>
+			</th>
+			<td>
+				<%= text_area(:note, :note_body, :cols => 80, :rows => 4, :class => "style12") %>
+			</td>
+		</tr>
+		<tr bgcolor='#EAEAEA'>
+			<td></td>
+			<td><div align="center" class="style12">
+			<input type="submit" name="Submit" value="Save Note" class="style12">
+			<%= link_to_remote "Cancel",{:update => 'add_note_' + @getserver,:loading => "busyBox.Show()",
+                        				:complete => "busyBox.Hide()",:url => {:action => :clear_div}},:href => "#note_" + @getserver %>
+			</div></td>
+		</tr>
+</table>		
+		

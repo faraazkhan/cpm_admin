@@ -1,0 +1,16 @@
+#page.replace_html 'servername' , '<b>Storage_Cap</b>'
+  page.GetGraph.action = @capacity_storage_link
+  page["current_tab"].value = 'capacity_storage'
+  page.hide'performance_metrics'
+  page.hide 'type_report_performance'
+  page.hide 'capacity_metrics'
+  page.hide 'type_report_capacity'
+  page.hide 'type_report_system'
+  page.hide 'system_metrics'
+  page.show 'storage_capacity'
+  page.show 'storage_metrics'
+  page.show  'storage_select_box'
+  page.show 'NumFileSystems'
+  page.hide 'storage_performance'
+  page.hide 'storage_perf_metrics'
+  page.GetGraph.submit()

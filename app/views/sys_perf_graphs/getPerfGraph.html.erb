@@ -1,0 +1,21 @@
+<div style="font-size:9pt; font-family:verdana; margin-bottom:1.5em">
+  <center>
+  <%- if !@nosameunit -%>
+      <%- if @getserver -%>
+      <%- @getserver[0..25].each do |s| -%>
+      <%= render_component :action => 'getPerfchart', :id =>s, :params =>{:client_id => @client,:typereport => @typereport,
+                                                                          :metrics => @metrics_availables,:datereport =>@datereport,:getserver=>s} %>
+                                                                        <br>
+                                                                          <br>
+
+                                                                        <%- end -%>
+                                                                        <%- end -%>  
+                                                                        <%- else -%>
+                                                                            <script language="javascript">
+alert('Please choose only metrics with the same units.');
+
+                                                                          </script>    
+                                                                        <% end%>
+                                                                        </center>
+                                                                        </body>
+                                                                        </html>

@@ -1,0 +1,16 @@
+#page.replace_html 'servername' , '<b>Performance</b>'
+page.GetGraph.action = @performance_link
+page["datereport"].value = Time.now.yesterday.strftime('%Y-%m-%d')
+page.show'performance_metrics'
+page.hide 'capacity_metrics'
+page.show 'type_report_performance'
+page.hide 'type_report_capacity'
+page.hide 'type_report_system'
+page.hide 'system_metrics'
+page.hide 'storage_capacity'
+page.hide 'storage_metrics'
+page.hide  'storage_select_box'
+page.hide 'NumFileSystems'
+page.hide 'storage_performance'
+page.hide 'storage_perf_metrics'
+page.GetGraph.submit()

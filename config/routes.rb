@@ -1,8 +1,9 @@
 CpmAdmin::Application.routes.draw do
   get "users_controller/approve"
-  root to: "admin/dashboard#index"
+  root to: "welcome#home"
   ActiveAdmin.routes(self)
-  get 'clients/landing' => 'clients#landing', :as => :client_landing
+  get 'welcome/home' => 'welcome#home', :as => :welcome_home
+  resource :ovpm_interface
   devise_for :users
 
   # The priority is based upon order of creation:

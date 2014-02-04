@@ -1,0 +1,15 @@
+#page.replace_html 'servername' , '<b>Capacity</b>'
+page.GetGraph.action = @capacity_link
+page.hide 'performance_metrics'
+page.hide 'type_report_performance'
+page.hide 'type_report_system'
+page.hide 'storage_capacity'
+page.show 'capacity_metrics'
+page.show 'type_report_capacity'
+page.hide 'system_metrics'
+page.hide 'storage_metrics'
+page.hide  'storage_select_box'
+page.hide 'NumFileSystems'
+page.hide 'storage_performance'
+page.hide 'storage_perf_metrics'
+page.GetGraph.submit()
