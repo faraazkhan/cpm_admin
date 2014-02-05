@@ -5,6 +5,9 @@ $fixed-width: 740px;
     width: $fixed-width;
     margin-left: auto;
     margin-right: auto;
+    font-size: 13px; 
+    line-height: 18px; 
+    font-family: verdana, arial, helvetica, sans-serif
 }
 
 .content {
@@ -12,6 +15,9 @@ $fixed-width: 740px;
   width: $fixed-width !important;
 }
 
+.content-well {
+    width: 555px;
+}
 
 .sidebar-nav {
   width: 141px;
@@ -27,10 +33,6 @@ $fixed-width: 740px;
 
 .hp-background input,select {
   color: black;
-}
-
-#clients {
-    color: black;
 }
 
 .hp-background a {
