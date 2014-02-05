@@ -1,11 +1,17 @@
-<dl class="nav">
-  <dd><a href="/gdcpm/gdcpm">Home</a></dd>
-  <dd><a href="/gdcpm/gdcpm/change_password">Change Password</a></dd>
+<ul class="nav nav-pill nav-stacked">
+  <li><a href="/gdcpm/gdcpm">Home</a></li>
+  <li><a href="/gdcpm/gdcpm/change_password">Change Password</a></li>
   <% if current_user.internal? %>
-    <dd><%= link_to 'Admin Dashboard', admin_dashboard_path %></dd>
+    <li><%= link_to 'Admin Dashboard', admin_dashboard_path %></li>
   <% end %>
-  <dd><a href="/gdcpm/gdcpm_help.htm" onclick="window.open(this.href);return false;">Help</a></dd>
-  <dd><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></dd>
-</dl>
+  <li><a href="/gdcpm/gdcpm_help.htm" onclick="window.open(this.href);return false;">Help</a></li>
+  <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+</ul>
+
+<% if current_user.internal? %>
+  <br/>Select Client / Group: <br/><br/>
+  <%= select_tag "clients", options_from_collection_for_select(@clients, "id", "name") %>
+<% end %>
+
 
 

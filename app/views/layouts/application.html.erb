@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= content_for?(:title) ? yield(:title) : "HP-GDCPM" %></title>
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "HP-GDCPM" %>">
   <%= stylesheet_link_tag "application", media: "all" %>
@@ -10,17 +9,13 @@
   </head>
   <body>
     <div class="container">
-      <header>
         <%= render 'layouts/header' %>
-      </header>
       <% if current_user %>
         <%= render 'layouts/authenticated' %>
       <% else %>
         <%= render 'layouts/login' %>
-      <% end %> 
-      <footer>
+      <% end %>
         <%= render 'layouts/footer' %>
-      </footer>
     </div>
   </body>
 </html>

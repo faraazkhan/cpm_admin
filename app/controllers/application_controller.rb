@@ -27,8 +27,12 @@ class ApplicationController < ActionController::Base
   def set_user_and_client
     if current_user
       @user = current_user
+      @clients = Client.order(:name)
       if current_user.is_client?
         @client = current_user.client
+      else #if user is not client, they must be internal
+        @client = Client.find_by_id session[:client_id]
+        @internal = true
       end
     end
   end
