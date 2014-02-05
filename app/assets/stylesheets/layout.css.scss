@@ -1,12 +1,26 @@
-$left-padding: 15px;
-$fixed-width: 740px;
+/*variables */
+  /* widths */
+  $fixed-width: 740px;
+  $content-width: 555px;
+  $sidebar-width: 141px;
+  /* fonts */
+  $font-size: 13px;
+  $panel-font-size: 9px;
+  /* colors */
+  $hp-bg-color: #003466;
+  $hp-white: white;
+  $dark-font-color: black;
+  /* spacing */
+  $left-padding: 15px;
+  $line-height: 18px;
+/* end variables */
 
 .container {
     width: $fixed-width;
     margin-left: auto;
     margin-right: auto;
-    font-size: 13px; 
-    line-height: 18px; 
+    font-size: $font-size;
+    line-height: $line-height;
     font-family: verdana, arial, helvetica, sans-serif
 }
 
@@ -16,32 +30,41 @@ $fixed-width: 740px;
 }
 
 .content-well {
-    width: 555px;
+    width: $content-width;
 }
 
 .sidebar-nav {
-  width: 141px;
+  width: $sidebar-width;
   float: left;
   margin-left: $left-padding;
   margin-right: 20px;
 }
 
 .hp-background {
-  background-color: #003466;
-  color: #FFFFFF;
+  width: $fixed-width;
+  background-color: $hp-bg-color;
+  color: $hp-white;
 }
 
 .hp-background input,select {
-  color: black;
+  color: $dark-font-color;
 }
 
 .hp-background a {
-  color: #FFFFFF;
+  color: $hp-white;
 }
 
 .login-padding {
-  padding-left: 40px; 
+  padding-left: 40px;
   padding-bottom:20px;
+}
+
+.panel {
+  width: $fixed-width;
+}
+
+.panel-heading, .panel-body {
+  font-size: $panel-font-size;
 }
 
 

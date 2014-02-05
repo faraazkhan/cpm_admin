@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_user_and_client
-
+  CONFIG = {'APP_TITLE' => 'APJ Regional Global Delivery Capacity & Performance Management'}
   def authenticate_admin_user!
     redirect_to new_user_session_path unless current_user.try(:is_admin?)
   end
@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
     if current_user
       @user = current_user
       @clients = Client.order(:name)
+      app_title = CONFIG['APP_TITLE']
+      user_name = @user.name
+      time = Time.now
+      @panel_text = [app_title, user_name, time].join(' ')
       if current_user.is_client?
         @client = current_user.client
       else #if user is not client, they must be internal
