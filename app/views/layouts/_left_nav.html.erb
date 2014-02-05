@@ -1,8 +1,11 @@
-<div class="leftNavigation">
-  <dl id="gallery">
-    <dd><a href="/gdcpm/gdcpm">Home</a></dd>
-    <dd><a href="/gdcpm/gdcpm/change_password">Change Password</a></dd>
-    <dd><a href="/gdcpm/gdcpm_help.htm" onclick="window.open(this.href);return false;">Help</a></dd>
-    <dd><a href="/gdcpm/gdcpm/logout">Log Out</a></dd>
-  </dl>
-</div>
+<dl class="nav">
+  <dd><a href="/gdcpm/gdcpm">Home</a></dd>
+  <dd><a href="/gdcpm/gdcpm/change_password">Change Password</a></dd>
+  <% if current_user.internal? %>
+    <dd><%= link_to 'Admin Dashboard', admin_dashboard_path %></dd>
+  <% end %>
+  <dd><a href="/gdcpm/gdcpm_help.htm" onclick="window.open(this.href);return false;">Help</a></dd>
+  <dd><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></dd>
+</dl>
+
+
