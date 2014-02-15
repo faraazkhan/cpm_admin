@@ -1,27 +1,10 @@
-/*variables */
-  /* widths */
-  $fixed-width: 740px;
-  $content-width: 555px;
-  $sidebar-width: 141px;
-  /* fonts */
-  $font-size: 13px;
-  $panel-font-size: 9px;
-  /* colors */
-  $hp-bg-color: #003466;
-  $hp-white: white;
-  $dark-font-color: black;
-  /* spacing */
-  $left-padding: 15px;
-  $line-height: 18px;
-/* end variables */
-
 .container {
     width: $fixed-width;
     margin-left: auto;
     margin-right: auto;
     font-size: $font-size;
     line-height: $line-height;
-    font-family: verdana, arial, helvetica, sans-serif
+    font-family: $hp-font-family;
 }
 
 .content {

@@ -1,0 +1,15 @@
+<%= image_tag('services_background.jpg', width: '525px') %>
+<h4>Services Available for <b><%= @client.name %></b></h4>
+  <% @client.services_by_group.each do |group, services| %>
+    <h5> <b><%= group.name %></b> </h5>
+      <div class="well">
+        <% services.each do |service| %>
+          <p>
+            <a href='#'><%= service.name %></a><br/>
+            <i><%= service.description %></i>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+
+

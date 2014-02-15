@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :set_user_and_client
+  before_filter :set_user_and_client, :load_environment_settings
   CONFIG = {'APP_TITLE' => 'APJ Regional Global Delivery Capacity & Performance Management'}
   def authenticate_admin_user!
     redirect_to new_user_session_path unless current_user.try(:is_admin?)
@@ -39,5 +39,9 @@ class ApplicationController < ActionController::Base
         @internal = true
       end
     end
+  end
+
+  def load_environment_settings
+    @page_title = EnvVar.app_title
   end
 end

@@ -7,190 +7,190 @@
 <%= stylesheet_link_tag "scaffold.css" %>
 <%= stylesheet_link_tag "general.css" %>
 <SCRIPT language=javascript type=text/javascript>
-			function highLightRow() {
-				if (document.getElementById) {
-					var tables=document.getElementsByTagName('table');
-						for (var i=0;i<tables.length;i++) {
-						if(tables[i].className=='highlightTable') {
-							var trs=tables[i].getElementsByTagName('tr');
-							for(var j=0;j<trs.length;j++) {
+function highLightRow() {
+  if (document.getElementById) {
+    var tables=document.getElementsByTagName('table');
+    for (var i=0;i<tables.length;i++) {
+      if(tables[i].className=='highlightTable') {
+        var trs=tables[i].getElementsByTagName('tr');
+        for(var j=0;j<trs.length;j++) {
 
-									if(trs[j].parentNode.nodeName=='TBODY')
-					{
-									if (j % 2 == 1) var highlightClass='highlightOffOdd';
+          if(trs[j].parentNode.nodeName=='TBODY')
+            {
+              if (j % 2 == 1) var highlightClass='highlightOffOdd';
 
-									else var highlightClass = 'highlightOffEven';
+              else var highlightClass = 'highlightOffEven';
 
-									trs[j].className=highlightClass;
+              trs[j].className=highlightClass;
 
-									trs[j].onmouseover=function(){
-										this.className='highlightOn';
-										return false
-									}
-									if (highlightClass=='highlightOffOdd') {
-										trs[j].onmouseout=function(){
-											this.className='highlightOffOdd';
-											return false
-										}
-									}
-									if (highlightClass=='highlightOffEven') {
-										trs[j].onmouseout=function(){
-											this.className='highlightOffEven';
-											return false
-										}}
-									}
-							}
-						}
-					}
-				}
-			}
-
-	function submit_exception_page() {
-        document.GetGraph.action = "<%= @exception_page_link %>";
-        document.GetGraph.submit();
-        document.GetGraph.action = "<%= @capacity_link %>";
-
-    }
-
-    function submit_all_exception_page() {
-        document.GetGraph.action = "<%= @all_exception_page_link %>";
-        document.GetGraph.submit();
-        document.GetGraph.action = "<%= @capacity_link %>";
-
-    }
-
-
-    function submit_capacity_graph() {
-        document.GetGraph.action = "<%= @capacity_link %>";
-        document.GetGraph.submit();
-    }
-    var cal = new CalendarPopup();
-    var d = new Date();
-    d.setDate(d.getDate()-1);
-
-    function selectAllServers(me){
-	       if (me == '')
-        		return;
-        	else {
-				var button = me
-
-				var search = document.getElementById("GetServer");
-				if(button.value == 'SelectAll') {
-					var NumOptions =  search.length;
-					for (indice = 0; indice < NumOptions; indice++) {
-						search.options[indice].selected = true;
-					}
-					button.value = 'UnselectAll';
-				} else {
-					var NumOptions =  search.length;
-					for (indice = 0; indice < NumOptions; indice++) {
-						search.options[indice].selected = false;
-					}
-					search.options[0].selected = true;
-					button.value = 'SelectAll';
-				}
-	       }
-
-    }
-
-    function selectAllStorageServers(me){
-	       if (me == '')
-        		return;
-        	else {
-				var button = document.getElementById("GetStorageData");
-				var search = document.getElementById("GetServer");
-				if(button.value == 'Get All Servers Data') {
-					var NumOptions =  search.length;
-					for (indice = 0; indice < NumOptions; indice++) {
-						search.options[indice].selected = true;
-					}
-					button.value = 'Unselect All Servers Data';
-				} else {
-					var NumOptions =  search.length;
-					for (indice = 0; indice < NumOptions; indice++) {
-						search.options[indice].selected = false;
-					}
-					search.options[0].selected = true;
-					button.value = 'Get All Servers Data';
-				}
-	       }
-
-    }
-
-
-
-    function update_select_options( target, opts_array, clear_select_list ) {
-
-        if( $(target).type.match("select" ) ){ // Confirm the target is a select box
-
-            // Remove existing options from the target and the clear_select_list
-            clear_select_list[clear_select_list.length] = target // Include the target in the clear list
-
-            for( k = 0;k < clear_select_list.length;k++){
-                obj = $(clear_select_list[k]);
-                if( obj.type.match("select") ){
-                    len = obj.childNodes.length;
-                    for( var i=0;i < len;i++){obj.removeChild(obj.firstChild);}
+              trs[j].onmouseover=function(){
+                this.className='highlightOn';
+                return false
+              }
+              if (highlightClass=='highlightOffOdd') {
+                trs[j].onmouseout=function(){
+                  this.className='highlightOffOdd';
+                  return false
                 }
+              }
+              if (highlightClass=='highlightOffEven') {
+                trs[j].onmouseout=function(){
+                  this.className='highlightOffEven';
+                  return false
+                }}
             }
-
-            // Populate the new options
-            for(i=0;i < opts_array.length;i++){
-                o = document.createElement( "option" );
-                o.appendChild( document.createTextNode( opts_array[i][0] ) );
-                o.setAttribute( "value", opts_array[i][1] );
-                o.setAttribute( "title", opts_array[i][0] );
-                if(i==0) o.setAttribute("selected",true);
-                obj.appendChild(o);
-            }
-
         }
+      }
+    }
+  }
+}
+
+function submit_exception_page() {
+  document.GetGraph.action = "<%= @exception_page_link %>";
+  document.GetGraph.submit();
+  document.GetGraph.action = "<%= @capacity_link %>";
+
+}
+
+function submit_all_exception_page() {
+  document.GetGraph.action = "<%= @all_exception_page_link %>";
+  document.GetGraph.submit();
+  document.GetGraph.action = "<%= @capacity_link %>";
+
+}
+
+
+function submit_capacity_graph() {
+  document.GetGraph.action = "<%= @capacity_link %>";
+  document.GetGraph.submit();
+}
+var cal = new CalendarPopup();
+var d = new Date();
+d.setDate(d.getDate()-1);
+
+function selectAllServers(me){
+  if (me == '')
+    return;
+  else {
+    var button = me
+
+    var search = document.getElementById("GetServer");
+    if(button.value == 'SelectAll') {
+      var NumOptions =  search.length;
+      for (indice = 0; indice < NumOptions; indice++) {
+        search.options[indice].selected = true;
+      }
+      button.value = 'UnselectAll';
+    } else {
+      var NumOptions =  search.length;
+      for (indice = 0; indice < NumOptions; indice++) {
+        search.options[indice].selected = false;
+      }
+      search.options[0].selected = true;
+      button.value = 'SelectAll';
+    }
+  }
+
+}
+
+function selectAllStorageServers(me){
+  if (me == '')
+    return;
+  else {
+    var button = document.getElementById("GetStorageData");
+    var search = document.getElementById("GetServer");
+    if(button.value == 'Get All Servers Data') {
+      var NumOptions =  search.length;
+      for (indice = 0; indice < NumOptions; indice++) {
+        search.options[indice].selected = true;
+      }
+      button.value = 'Unselect All Servers Data';
+    } else {
+      var NumOptions =  search.length;
+      for (indice = 0; indice < NumOptions; indice++) {
+        search.options[indice].selected = false;
+      }
+      search.options[0].selected = true;
+      button.value = 'Get All Servers Data';
+    }
+  }
+
+}
+
+
+
+function update_select_options( target, opts_array, clear_select_list ) {
+
+  if( $(target).type.match("select" ) ){ // Confirm the target is a select box
+
+    // Remove existing options from the target and the clear_select_list
+    clear_select_list[clear_select_list.length] = target // Include the target in the clear list
+
+    for( k = 0;k < clear_select_list.length;k++){
+      obj = $(clear_select_list[k]);
+      if( obj.type.match("select") ){
+        len = obj.childNodes.length;
+        for( var i=0;i < len;i++){obj.removeChild(obj.firstChild);}
+      }
     }
 
-    function submit_storage_mtf() {
-        document.GetGraph.action = "<%= @capacity_storage_mtf_link %>";
-        document.GetGraph.submit();
+    // Populate the new options
+    for(i=0;i < opts_array.length;i++){
+      o = document.createElement( "option" );
+      o.appendChild( document.createTextNode( opts_array[i][0] ) );
+      o.setAttribute( "value", opts_array[i][1] );
+      o.setAttribute( "title", opts_array[i][0] );
+      if(i==0) o.setAttribute("selected",true);
+      obj.appendChild(o);
     }
 
-     function submit_storage_graph() {
-        document.GetGraph.action = "<%= @capacity_storage_link %>";
-        document.GetGraph.submit();
-    }
+  }
+}
 
-    function submit_storage_graph_drop_list() {
-        document.GetGraph.action = "<%= @capacity_storage_link %>";
-        document.GetGraph.submit();
-        document.GetGraph.action = "<%= @capacity_storage_mtf_link %>";
-    }
+function submit_storage_mtf() {
+  document.GetGraph.action = "<%= @capacity_storage_mtf_link %>";
+  document.GetGraph.submit();
+}
 
-    </SCRIPT>
+function submit_storage_graph() {
+  document.GetGraph.action = "<%= @capacity_storage_link %>";
+  document.GetGraph.submit();
+}
+
+function submit_storage_graph_drop_list() {
+  document.GetGraph.action = "<%= @capacity_storage_link %>";
+  document.GetGraph.submit();
+  document.GetGraph.action = "<%= @capacity_storage_mtf_link %>";
+}
+
+</SCRIPT>
 <style type="text/css">
 <!--
 select {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; border: #000000; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
 .style10 {
-	font-size: 10px;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .style12 {font-size: 10; }
 .style14 {color: #E2E3E6}
 .style15 {
-	color: #FFFFFF;
-	font-weight: bold;
+  color: #FFFFFF;
+  font-weight: bold;
 }
 .style16 {font-size: 11px}
 .style18 {color: #FFFFFF}
 .style27 {color: #D0D4DF}
 .styledrop {
-    margin: 0px;
-    padding: 0px;
-    border: groove 4px navy;
-    width: 130px;
-    height: auto;
-    background-color: #EFEFEF;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-weight: normal;
-    font-size: 9;
-    }
+  margin: 0px;
+  padding: 0px;
+  border: groove 4px navy;
+  width: 130px;
+  height: auto;
+  background-color: #EFEFEF;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 9;
+}
 
 #menuv dl {margin: 0 auto; padding: 0 0 0px 0; background: #003466}
 #menuv dt {margin:0; padding: 1px; font-size: 12; font-weight:bold; color: #003466; border-bottom:1px solid #fff; background: #003466}
@@ -199,41 +199,41 @@ select {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; bor
 #galleryv a:hover {font-size: 12; text-decoration:underline; background: #268 color:#FFFFF; text-align: left;}
 
 a.menu {
-	font-size: 12;
-	display: block;
-	text-align: center;
-	color: #FFFFFF;
-	background-color: #47648B;
-	}
+  font-size: 12;
+  display: block;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #47648B;
+}
 
 a.menu:link {
-	text-align: center;
-	color: #000000;
-	background-color: #C6D6FD;
-	text-align: center;
-	text-decoration: underline;
-	}
+  text-align: center;
+  color: #000000;
+  background-color: #C6D6FD;
+  text-align: center;
+  text-decoration: underline;
+}
 
 a.menu:visited {
-	color: #FFFFFF;
-	background-color: #47648B;
-	}
+  color: #FFFFFF;
+  background-color: #47648B;
+}
 
 a.menu:hover {
-	text-align: center;
-	color: #000000;
-	background-color: #C6D6FD;
-	text-align: center;
-	text-decoration: underline;
-	}
+  text-align: center;
+  color: #000000;
+  background-color: #C6D6FD;
+  text-align: center;
+  text-decoration: underline;
+}
 
 a.menu:active {
-	text-align: center;
-	color: #000000;
-	background-color: #C6D6FD;
-	text-align: center;
-	text-decoration: underline;
-	}
+  text-align: center;
+  color: #000000;
+  background-color: #C6D6FD;
+  text-align: center;
+  text-decoration: underline;
+}
 
 
 
@@ -247,421 +247,421 @@ a.menu:active {
 <META content="MSHTML 6.00.2900.3020" name=GENERATOR>
 </HEAD>
 <BODY id=admin onload=highLightRow() leftMargin=0 topMargin=0><center><TABLE border=0><TBODY><TR>
-    <TD bordercolor="#EFEFEF" bgcolor="#003466">
-    	<%= image_tag("header_service.jpg", :size => "740x49", :alt => "OvPm")%></TD>
-	</TR>
-  <TR>
-    <TD bordercolor="#FFFFFF" bgcolor="#EFEFEF" class="style10"><DIV id=banner>
-        <div align="right"><%= @page_title.value %> - <%= @user.name %> - <%= Time.now.to_s %> </div>
-      </DIV></TD></TR>
-  <TR>
-  <% if @global_table %>
-      <form action="<%=@performance_link %>" method="post" name="GetGraph" id="GetGraph" target="iframe">
-  <% else %>
-        <form action="<%=@capacity_link %>" method="post" name="GetGraph" id="GetGraph" target="iframe">
-  <% end %>
-       <input name="client_id" type='hidden' value="<%= @client.id %>">
-       <input name="connection_id" type='hidden' value="<%= @connection.id %>">
-        <input name="current_tab" id="current_tab" type='hidden' value="">
+      <TD bordercolor="#EFEFEF" bgcolor="#003466">
+        <%= image_tag("header_service.jpg", :size => "740x49", :alt => "OvPm")%></TD>
+    </TR>
+    <TR>
+      <TD bordercolor="#FFFFFF" bgcolor="#EFEFEF" class="style10"><DIV id=banner>
+          <div align="right"><%= @page_title.value %> - <%= @user.name %> - <%= Time.now.to_s %> </div>
+    </DIV></TD></TR>
+    <TR>
+      <% if @global_table %>
+        <form action="<%=@performance_link %>" method="post" name="GetGraph" id="GetGraph" target="iframe">
+      <% else %>
+          <form action="<%=@capacity_link %>" method="post" name="GetGraph" id="GetGraph" target="iframe">
+        <% end %>
+          <input name="client_id" type='hidden' value="<%= @client.id %>">
+          <input name="connection_id" type='hidden' value="<%= @connection.id %>">
+          <input name="current_tab" id="current_tab" type='hidden' value="">
 
-        <% if @server_aliases %>
+          <% if @server_aliases %>
             <input name="server_alias" type='hidden' value="true">
         <% end %>
-    <TD bgcolor="#F4F4F4">
-	<table>
-	<tr bgcolor="#003466" class="style10">
-	<td><span class="style6"><span class="style1  style16 style18">
-	</span></span>
-		    <table border="0">
-		    <tr><td><span class="style6">
-			  Search:</span><br>
-              <%= javascript_include_tag "CastleBusyBox" %>
-                <iframe id="BusyBoxIFrame" name="BusyBoxIFrame" frameBorder="0" scrolling="no" ondrop="return false;">
-                </iframe>
-                <script language="JavaScript">
-                		   imagepath = "<%=image_path('gears_ani_')%>"
-						   htmlpath = "<%= image_path('BusyBox.htm')%>"
-                           var busyBox = new BusyBox("BusyBoxIFrame", "busyBox", 4, imagepath, ".gif", 125, 308, 172, htmlpath);
-                </script>
-    		    <center><%= text_field_tag :textserver, params[:textserver], :style => "font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;" %>
+          <TD bgcolor="#F4F4F4">
+            <table>
+              <tr bgcolor="#003466" class="style10">
+                <td><span class="style6"><span class="style1  style16 style18">
+                  </span></span>
+                  <table border="0">
+                    <tr><td><span class="style6">
+                          Search:</span><br>
+                        <%= javascript_include_tag "CastleBusyBox" %>
+                        <iframe id="BusyBoxIFrame" name="BusyBoxIFrame" frameBorder="0" scrolling="no" ondrop="return false;">
+                        </iframe>
+                        <script language="JavaScript">
+imagepath = "<%=image_path('gears_ani_')%>"
+htmlpath = "<%= image_path('BusyBox.htm')%>"
+var busyBox = new BusyBox("BusyBoxIFrame", "busyBox", 4, imagepath, ".gif", 125, 308, 172, htmlpath);
+                        </script>
+                        <center><%= text_field_tag :textserver, params[:textserver], :style => "font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;" %>
 
-                 <%= observe_field(:textserver,:frequency => 1,:url => {:action => :servers_list_os},
-                                        :loading => "busyBox.Show()",
-                        				:complete => "busyBox.Hide()",
-                                         :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)" ) %>
+                        <%= observe_field(:textserver,:frequency => 1,:url => {:action => :servers_list_os},
+                                          :loading => "busyBox.Show()",
+                                          :complete => "busyBox.Hide()",
+                                          :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)" ) %>
 
 
-			  </td>
-			  </tr>
-		   	   <tr><td>
-			  <% if @oslist %>
-			     <select name="osname" id="osname" class="styledrop">
-                    <option value="all">all</option>
-                    <% for os in @oslist %>
-                     <option value="<%= os.osname %>" ><%=os.osname %></option>
-                   <% end %>
-			     </select>
-			     <%= observe_field(:osname,:url => {:action => :servers_list_os},
-                                        :loading => "busyBox.Show()",
-                        				:complete => "busyBox.Hide()",
-                                        :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
-              <% end %>
-              </td></tr>
-              <% if @filter1 and @filter1.length > 0 %>
-                  <tr>
-              <% else %>
-                  <tr style="display: none;">
-              <% end %>
-                <td>
-                 <select name="filter1" id="filter1" class="styledrop">
-                    <option value="all">all</option>
-                    <% if @filter1 %>
-                        <% for f1 in @filter1 %>
-                            <option value="<%= f1.filter1 %>" ><%=f1.filter1 %></option>
-                       <% end %>
-                    <% end %>
-			     </select>
-			     <%= observe_field(:filter1,:url => {:action => :servers_list_os},
-                                        :loading => "busyBox.Show()",
-                        				:complete => "busyBox.Hide()",
-                                        :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
-              </td></tr>
-              <% if @filter2 and @filter2.length > 0 %>
-                 <tr>
-               <% else %>
-                 <tr style="display: none;">
-               <% end %>
-                 <td>
-			     <select name="filter2" id="filter2" class="styledrop">
-                    <option value="all">all</option>
-                    <% if @filter2 %>
-                        <% for f2 in @filter2 %>
-                            <option value="<%= f2.filter2 %>" ><%=f2.filter2 %></option>
-                       <% end %>
-                    <% end %>
-			     </select>
-			     <%= observe_field(:filter2,:url => {:action => :servers_list_os},
-                                        :loading => "busyBox.Show()",
-                        				:complete => "busyBox.Hide()",
-                                        :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
-              </td></tr>
-               <% if @filter3 and @filter3.length > 0 %>
-                <tr>
-                <% else %>
-                    <tr style="display: none;">
-                <% end %>
-               <td>
-			     <select name="filter3" id="filter3" class="styledrop">
-                    <option value="all">all</option>
-                    <% if @filter3 %>
-                        <% for f3 in @filter3 %>
-                            <option value="<%= f3.filter3 %>" ><%=f3.filter3 %></option>
-                       <% end %>
-                    <% end %>
-			     </select>
-			     <%= observe_field(:filter3,:url => {:action => :servers_list_os},
-                                        :loading => "busyBox.Show()",
-                        				:complete => "busyBox.Hide()",
-                                        :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
-              </td></tr>
-               <% if @filter4 and @filter4.length > 0%>
-               <tr>
-               <% else %>
-                <tr style="display: none;">
-               <% end %>
-               <td>
-			     <select name="filter4" id="filter4" class="styledrop">
-                    <option value="all">all</option>
-                    <% if @filter4 %>
-                        <% for f4 in @filter4 %>
-                            <option value="<%= f4.filter4 %>" ><%=f4.filter4 %></option>
-                       <% end %>
-                    <% end %>
-			     </select>
-			     <%= observe_field(:filter4,:url => {:action => :servers_list_os},
-                                        :loading => "busyBox.Show()",
-                        				:complete => "busyBox.Hide()",
-                                        :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
-               </td></tr>
-              <tr>
-                <td bgcolor="#003466"><div align="center" class="style15 style16">
-                  <div align="left"><%= @client.name%> :</div>
-                </div></td>
-              </tr>
-              <tr>
-                <td>
-                  <div align="center">
-                  <div id="ServersList">
-                      <select name="GetServer[]" id="GetServer" size="12" class="styledrop" multiple onchange="this.form.submit()">
-                        <% if @servers %>
-                            <% @first = true%>
-                            <% for system in @servers %>
-                                <% @namd = system.systemid %>
-                                <% if @server_aliases %>
-                                    <% @alias = system.alias %>
-                                <% else %>
-                                    <% @alias = system.systemid %>
-                                <% end %>
-                                <%if @first %>
-                                    <option title="<%= @alias %>" value="<%= system.systemid %>" selected><%= @alias %></option>
-                                    <% @first = false%>
-                                <% else %>
-                                    <option title="<%= @alias %>" value="<%= system.systemid %>" ><%= @alias %></option>
-                                <% end %>
-                           <% end %>
-                        <% else %>
-                                <option value="No" >No Servers</option>
-                        <% end %>
-                    </select>
+                                      </td>
+                                      </tr>
+                                      <tr><td>
+                                          <% if @oslist %>
+                                            <select name="osname" id="osname" class="styledrop">
+                                            <option value="all">all</option>
+                                            <% for os in @oslist %>
+                                              <option value="<%= os.osname %>" ><%=os.osname %></option>
+                                          <% end %>
+                                          </select>
+                                          <%= observe_field(:osname,:url => {:action => :servers_list_os},
+                                                            :loading => "busyBox.Show()",
+                                                            :complete => "busyBox.Hide()",
+                                                            :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
+                                                        <% end %>
+                                                        </td></tr>
+                                                        <% if @filter1 and @filter1.length > 0 %>
+                                                          <tr>
+                                                        <% else %>
+                                                            <tr style="display: none;">
+                                                          <% end %>
+                                                            <td>
+                                                              <select name="filter1" id="filter1" class="styledrop">
+                                                                <option value="all">all</option>
+                                                                <% if @filter1 %>
+                                                                  <% for f1 in @filter1 %>
+                                                                  <option value="<%= f1.filter1 %>" ><%=f1.filter1 %></option>
+                                                              <% end %>
+                                                              <% end %>
+                                                              </select>
+                                                              <%= observe_field(:filter1,:url => {:action => :servers_list_os},
+                                                                                :loading => "busyBox.Show()",
+                                                                                :complete => "busyBox.Hide()",
+                                                                                :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
+                                                                          </td></tr>
+                                                                            <% if @filter2 and @filter2.length > 0 %>
+                                                                              <tr>
+                                                                            <% else %>
+                                                                                <tr style="display: none;">
+                                                                              <% end %>
+                                                                                <td>
+                                                                                  <select name="filter2" id="filter2" class="styledrop">
+                                                                                    <option value="all">all</option>
+                                                                                    <% if @filter2 %>
+                                                                                      <% for f2 in @filter2 %>
+                                                                                      <option value="<%= f2.filter2 %>" ><%=f2.filter2 %></option>
+                                                                                  <% end %>
+                                                                                  <% end %>
+                                                                                  </select>
+                                                                                  <%= observe_field(:filter2,:url => {:action => :servers_list_os},
+                                                                                                    :loading => "busyBox.Show()",
+                                                                                                    :complete => "busyBox.Hide()",
+                                                                                                    :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
+                                                                                              </td></tr>
+                                                                                                <% if @filter3 and @filter3.length > 0 %>
+                                                                                                  <tr>
+                                                                                                <% else %>
+                                                                                                    <tr style="display: none;">
+                                                                                                  <% end %>
+                                                                                                    <td>
+                                                                                                      <select name="filter3" id="filter3" class="styledrop">
+                                                                                                        <option value="all">all</option>
+                                                                                                        <% if @filter3 %>
+                                                                                                          <% for f3 in @filter3 %>
+                                                                                                          <option value="<%= f3.filter3 %>" ><%=f3.filter3 %></option>
+                                                                                                      <% end %>
+                                                                                                      <% end %>
+                                                                                                      </select>
+                                                                                                      <%= observe_field(:filter3,:url => {:action => :servers_list_os},
+                                                                                                                        :loading => "busyBox.Show()",
+                                                                                                                        :complete => "busyBox.Hide()",
+                                                                                                                        :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
+                                                                                                                  </td></tr>
+                                                                                                                    <% if @filter4 and @filter4.length > 0%>
+                                                                                                                      <tr>
+                                                                                                                    <% else %>
+                                                                                                                        <tr style="display: none;">
+                                                                                                                      <% end %>
+                                                                                                                        <td>
+                                                                                                                          <select name="filter4" id="filter4" class="styledrop">
+                                                                                                                            <option value="all">all</option>
+                                                                                                                            <% if @filter4 %>
+                                                                                                                              <% for f4 in @filter4 %>
+                                                                                                                              <option value="<%= f4.filter4 %>" ><%=f4.filter4 %></option>
+                                                                                                                          <% end %>
+                                                                                                                          <% end %>
+                                                                                                                          </select>
+                                                                                                                          <%= observe_field(:filter4,:url => {:action => :servers_list_os},
+                                                                                                                                            :loading => "busyBox.Show()",
+                                                                                                                                            :complete => "busyBox.Hide()",
+                                                                                                                                            :with => "'textserver='+ encodeURIComponent($('textserver').value) + '&osname='+ encodeURIComponent($('osname').value) + '&filter1=' + encodeURIComponent($('filter1').value) + '&filter2=' + encodeURIComponent($('filter2').value) + '&filter3=' + encodeURIComponent($('filter3').value) + '&filter4=' + encodeURIComponent($('filter4').value)") %>
+                                                                                                                                      </td></tr>
+                                                                                                                                        <tr>
+                                                                                                                                          <td bgcolor="#003466"><div align="center" class="style15 style16">
+                                                                                                                                              <div align="left"><%= @client.name%> :</div>
+                                                                                                                                          </div></td>
+                                                                                                                                        </tr>
+                                                                                                                                        <tr>
+                                                                                                                                          <td>
+                                                                                                                                            <div align="center">
+                                                                                                                                              <div id="ServersList">
+                                                                                                                                                <select name="GetServer[]" id="GetServer" size="12" class="styledrop" multiple onchange="this.form.submit()">
+                                                                                                                                                  <% if @servers %>
+                                                                                                                                                    <% @first = true%>
+                                                                                                                                                  <% for system in @servers %>
+                                                                                                                                                    <% @namd = system.systemid %>
+                                                                                                                                                  <% if @server_aliases %>
+                                                                                                                                                    <% @alias = system.alias %>
+                                                                                                                                                <% else %>
+                                                                                                                                                    <% @alias = system.systemid %>
+                                                                                                                                                <% end %>
+                                                                                                                                                  <%if @first %>
+                                                                                                                                                    <option title="<%= @alias %>" value="<%= system.systemid %>" selected><%= @alias %></option>
+                                                                                                                                                  <% @first = false%>
+                                                                                                                                                <% else %>
+                                                                                                                                                    <option title="<%= @alias %>" value="<%= system.systemid %>" ><%= @alias %></option>
+                                                                                                                                                <% end %>
+                                                                                                                                                <% end %>
+                                                                                                                                                <% else %>
+                                                                                                                                                    <option value="No" >No Servers</option>
+                                                                                                                                                <% end %>
+                                                                                                                                                </select>
 
-                            <div align="center" class="style6"><div id="NumServers"><%= @servers.length %> Servers</div></div>
-                 </div>
-                </div></td><%if @storage_summary_table %>
-                        <%= observe_field(:GetServer,:url => {:controller=>:storage_cap_graphs, :action => :file_systems_list},
-                                        :loading => "busyBox.Show()",
-                        				:complete => "busyBox.Hide()",
-                                        :with => "'server='+ encodeURIComponent($('GetServer').value)")
-                                 %>
-                         <% end %>
-              </tr>
-              <tr>
-              <td><div id="storage_select_box" style="display: none;">
-              <select name="fs_mountpoint[]" id="fs_mountpoint" size="5" class="styledrop" multiple onchange="if(this.form.current_tab.value == 'performance_storage'){this.form.submit();} else {submit_storage_graph_drop_list();}">
-                  <% if @fs_mountpoint %>
-                    <% sel = false %>
-                    <% for fs in @fs_mountpoint %>
-                       <% if !sel %>
-                             <option value="<%= fs.filesystem %>" selected ><%=fs.filesystem %></option>
-                             <%sel=true %>
-                       <% else %>
-                             <option value="<%= fs.filesystem %>" ><%=fs.filesystem %></option>
-                       <% end %>
-                   <% end %>
-                 <% end %>
-	          </select>
-	         </div>
-			  </td>
-              </tr>
-              <tr><td>
-               <div align="center" class="style6" id="NumFileSystems" style="display: none;" ><% if @fs_mountpoint %><%= @fs_mountpoint.size.to_s + "_File_Systems"  %><%- end -%></div>
-              </td></tr>
+                                                                                                                                                <div align="center" class="style6"><div id="NumServers"><%= @servers.length %> Servers</div></div>
+                                                                                                                                              </div>
+                                                                                                                                          </div></td><%if @storage_summary_table %>
+                                                                                                                                          <%= observe_field(:GetServer,:url => {:controller=>:storage_cap_graphs, :action => :file_systems_list},
+                                                                                                                                                            :loading => "busyBox.Show()",
+                                                                                                                                                            :complete => "busyBox.Hide()",
+                                                                                                                                                            :with => "'server='+ encodeURIComponent($('GetServer').value)")
+                                                                                                                                                          %>
+                                                                                                                                                        <% end %>
+                                                                                                                                                          </tr>
+                                                                                                                                                          <tr>
+                                                                                                                                                            <td><div id="storage_select_box" style="display: none;">
+                                                                                                                                                                <select name="fs_mountpoint[]" id="fs_mountpoint" size="5" class="styledrop" multiple onchange="if(this.form.current_tab.value == 'performance_storage'){this.form.submit();} else {submit_storage_graph_drop_list();}">
+                                                                                                                                                                  <% if @fs_mountpoint %>
+                                                                                                                                                                    <% sel = false %>
+                                                                                                                                                                  <% for fs in @fs_mountpoint %>
+                                                                                                                                                                    <% if !sel %>
+                                                                                                                                                                    <option value="<%= fs.filesystem %>" selected ><%=fs.filesystem %></option>
+                                                                                                                                                                  <%sel=true %>
+                                                                                                                                                                <% else %>
+                                                                                                                                                                    <option value="<%= fs.filesystem %>" ><%=fs.filesystem %></option>
+                                                                                                                                                                <% end %>
+                                                                                                                                                                <% end %>
+                                                                                                                                                                <% end %>
+                                                                                                                                                                </select>
+                                                                                                                                                              </div>
+                                                                                                                                                            </td>
+                                                                                                                                                          </tr>
+                                                                                                                                                          <tr><td>
+                                                                                                                                                              <div align="center" class="style6" id="NumFileSystems" style="display: none;" ><% if @fs_mountpoint %><%= @fs_mountpoint.size.to_s + "_File_Systems"  %><%- end -%></div>
+                                                                                                                                                          </td></tr>
 
-              <tr><td>
-			  <div id="menuv">
-			<dl id="galleryv">
-				<dd><%= link_to "Home" , :controller => 'gdcpm', :action => 'index'%></dd>
-				<dd><%= link_to "Help" , "/gdcpm/gdcpm_help.htm",:popup=>true %></dd>
-				<dd><%= link_to "Log Out" , :controller => 'gdcpm', :action => 'logout'%></dd>
-			</dl>
-		</div>
-			  </td></tr>
-            </table></td>
-	<td>
-	<table border="0">
-      <tr bgcolor="#CCCCCC">
-       <% if @global_table %><td width="130">
-            <%= link_to_remote ("System_Performance",{:url=>{:action=>"performance"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()" },{:class=>'menu',:title=>'Performance Service'}) %>
-       </td>
-       <% end %>
-       <% if @capacity_table %>
-       <td width="130">
-            <%= link_to_remote ("System_Capacity",{:url=>{:action=>"capacity"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()"},{:class=>'menu',:title=>'Capacity Service'}) %>
-       </td>
-       <% end %>
+                                                                                                                                                          <tr><td>
+                                                                                                                                                              <div id="menuv">
+                                                                                                                                                                <dl id="galleryv">
+                                                                                                                                                                  <dd><%= link_to "Home" , :controller => 'gdcpm', :action => 'index'%></dd>
+                                                                                                                                                                  <dd><%= link_to "Help" , "/gdcpm/gdcpm_help.htm",:popup=>true %></dd>
+                                                                                                                                                                  <dd><%= link_to "Log Out" , :controller => 'gdcpm', :action => 'logout'%></dd>
+                                                                                                                                                                </dl>
+                                                                                                                                                              </div>
+                                                                                                                                                          </td></tr>
+                                                                                                                                                      </table></td>
+                                                                                                                                                      <td>
+                                                                                                                                                        <table border="0">
+                                                                                                                                                          <tr bgcolor="#CCCCCC">
+                                                                                                                                                            <% if @global_table %><td width="130">
+                                                                                                                                                                <%= link_to_remote ("System_Performance",{:url=>{:action=>"performance"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()" },{:class=>'menu',:title=>'Performance Service'}) %>
+                                                                                                                                                            </td>
+                                                                                                                                                          <% end %>
+                                                                                                                                                            <% if @capacity_table %>
+                                                                                                                                                              <td width="130">
+                                                                                                                                                              <%= link_to_remote ("System_Capacity",{:url=>{:action=>"capacity"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()"},{:class=>'menu',:title=>'Capacity Service'}) %>
+                                                                                                                                                            </td>
+                                                                                                                                                          <% end %>
 
-       <% if @storage_performance_table %>
-        <td width="130">
-            <%= link_to_remote ("Storage_Performance",{:url=>{:action=>"performance_storage"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()"},{:class=>'menu',:title=>'Storage Performance'}) %>
-        </td>
-       <% end %>
+                                                                                                                                                            <% if @storage_performance_table %>
+                                                                                                                                                              <td width="130">
+                                                                                                                                                              <%= link_to_remote ("Storage_Performance",{:url=>{:action=>"performance_storage"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()"},{:class=>'menu',:title=>'Storage Performance'}) %>
+                                                                                                                                                            </td>
+                                                                                                                                                          <% end %>
 
-        <% if @storage_summary_table %>
-        <td width="130">
-            <%= link_to_remote ("Storage_Capacity",{:url=>{:action=>"capacity_storage"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()"},{:class=>'menu',:title=>'Storage Capacity'}) %>
-        </td>
-       <% end %>
+                                                                                                                                                            <% if @storage_summary_table %>
+                                                                                                                                                              <td width="130">
+                                                                                                                                                              <%= link_to_remote ("Storage_Capacity",{:url=>{:action=>"capacity_storage"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()"},{:class=>'menu',:title=>'Storage Capacity'}) %>
+                                                                                                                                                            </td>
+                                                                                                                                                          <% end %>
 
-       <% if @systems_table %>
-       <td width="120">
-            <%= link_to_remote ("System_Info",{:url=>{:action=>"system_info"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()"},{:class=>'menu',:title=>'System Information'}) %>
-       </td>
-       <% end %>
+                                                                                                                                                            <% if @systems_table %>
+                                                                                                                                                              <td width="120">
+                                                                                                                                                              <%= link_to_remote ("System_Info",{:url=>{:action=>"system_info"},:loading => "busyBox.Show()",:complete => "busyBox.Hide()"},{:class=>'menu',:title=>'System Information'}) %>
+                                                                                                                                                            </td>
+                                                                                                                                                          <% end %>
 
-      </tr>
-    </table>
-<div align="center">
-			    <table width="558">
-			        <tr>
-			          <td width="404" bgcolor="#C5CAD9" class="style10">
-			            <div align="left">
+                                                                                                                                                          </tr>
+                                                                                                                                                        </table>
+                                                                                                                                                        <div align="center">
+                                                                                                                                                          <table width="558">
+                                                                                                                                                            <tr>
+                                                                                                                                                              <td width="404" bgcolor="#C5CAD9" class="style10">
+                                                                                                                                                                <div align="left">
 
-                          <% if @global_table %>
-    			              <table border="0" id="type_report_performance">
-    			          <% else %>
-    			              <table border="0" id="type_report_performance" style="display: none;">
-    			          <% end %>
-                            <tr>
-                              <td width="32"><span class="style1 style10">Daily:</span></td>
-						      <td width="96">
-						          <input name="datereport" id="datereport" type="text" class="style10" onClick="this.value=formatDate(d,'y-MM-dd');cal.select(this,'datereport','yyyy-MM-dd'); return false;">
-						      </td>
-                              <td width="66"><span class="style10">Last_Week:</span></td>
-						      <td width="20"><input name="typereport" id="typereport" type="radio" class="style10" value="LastWeek" onclick="this.form.datereport.value='';this.form.submit()"></td>
-                              <td width="88"><span class="style10">Current_month:</span></td>
-						      <td width="20"><input name="typereport" id="typereport" type="radio" class="style10" value="CurrentMonth" onclick="this.form.datereport.value='';this.form.submit()"></td>
-                              <td width="68" class="style10">Last_Month:</td>
-						      <td width="66"><input name="typereport" id="typereport" type="radio" class="style10" value="LastMonth" onclick="this.form.datereport.value='';this.form.submit()"></td>
-						      <td><input type="submit" name="Submit" value="GetGraph" class="style10"></td>
-                            </tr>
-                          </table>
-                          <% if @capacity_table and !@global_table %>
-                            <table border="0" id="type_report_capacity">
-                          <% else %>
-                            <table border="0" id="type_report_capacity" style="display: none;">
-                          <% end %>
-                            <tr>
-                              <td>
-                                <span class="style10">Zone:</span><select name="GetZone" id="GetZone" class="style10" onchange="this.form.submit();">
-                                     <% for zone in @zones %>
-                                            <option value="<%= zone.db_zone_number %>" ><%=zone.showname %></option>
-                                     <% end %>
-                			    </select>
-                              </td>
-						      <td><span class="style10">12_Months_:</span></td>
-						      <td><input name="typereportcap" id="typereportcap" type="radio" value="12Months" class="style10" onclick="this.form.submit();" checked></td>
-                              <td><span class="style10">Max_Data_:</span></td>
-						      <td><input name="typereportcap" id="typereportcap" type="radio" value="MaxData" class="style10" onclick="this.form.submit();"></td>
-						      <td><input type="button" name="Capacity_Graph" value="GetGraph" onclick="submit_capacity_graph()" class="style10"></td>
-						      <td><input type="button" name="ExceptionPage" value="GetExceptions" onclick="submit_exception_page()" class="style10"></td>
-						      <td><input type="button" name="AllExceptionPage" id= "AllExceptionPage" value="SelectAll" onclick="selectAllServers(this);submit_exception_page()" class="style10"></td>
-                            </tr>
-                          </table>
+                                                                                                                                                                  <% if @global_table %>
+                                                                                                                                                                    <table border="0" id="type_report_performance">
+                                                                                                                                                                  <% else %>
+                                                                                                                                                                      <table border="0" id="type_report_performance" style="display: none;">
+                                                                                                                                                                    <% end %>
+                                                                                                                                                                      <tr>
+                                                                                                                                                                        <td width="32"><span class="style1 style10">Daily:</span></td>
+                                                                                                                                                                        <td width="96">
+                                                                                                                                                                          <input name="datereport" id="datereport" type="text" class="style10" onClick="this.value=formatDate(d,'y-MM-dd');cal.select(this,'datereport','yyyy-MM-dd'); return false;">
+                                                                                                                                                                        </td>
+                                                                                                                                                                        <td width="66"><span class="style10">Last_Week:</span></td>
+                                                                                                                                                                        <td width="20"><input name="typereport" id="typereport" type="radio" class="style10" value="LastWeek" onclick="this.form.datereport.value='';this.form.submit()"></td>
+                                                                                                                                                                        <td width="88"><span class="style10">Current_month:</span></td>
+                                                                                                                                                                        <td width="20"><input name="typereport" id="typereport" type="radio" class="style10" value="CurrentMonth" onclick="this.form.datereport.value='';this.form.submit()"></td>
+                                                                                                                                                                        <td width="68" class="style10">Last_Month:</td>
+                                                                                                                                                                        <td width="66"><input name="typereport" id="typereport" type="radio" class="style10" value="LastMonth" onclick="this.form.datereport.value='';this.form.submit()"></td>
+                                                                                                                                                                        <td><input type="submit" name="Submit" value="GetGraph" class="style10"></td>
+                                                                                                                                                                      </tr>
+                                                                                                                                                                    </table>
+                                                                                                                                                                    <% if @capacity_table and !@global_table %>
+                                                                                                                                                                      <table border="0" id="type_report_capacity">
+                                                                                                                                                                    <% else %>
+                                                                                                                                                                        <table border="0" id="type_report_capacity" style="display: none;">
+                                                                                                                                                                      <% end %>
+                                                                                                                                                                        <tr>
+                                                                                                                                                                          <td>
+                                                                                                                                                                            <span class="style10">Zone:</span><select name="GetZone" id="GetZone" class="style10" onchange="this.form.submit();">
+                                                                                                                                                                              <% for zone in @zones %>
+                                                                                                                                                                                <option value="<%= zone.db_zone_number %>" ><%=zone.showname %></option>
+                                                                                                                                                                            <% end %>
+                                                                                                                                                                            </select>
+                                                                                                                                                                          </td>
+                                                                                                                                                                          <td><span class="style10">12_Months_:</span></td>
+                                                                                                                                                                          <td><input name="typereportcap" id="typereportcap" type="radio" value="12Months" class="style10" onclick="this.form.submit();" checked></td>
+                                                                                                                                                                          <td><span class="style10">Max_Data_:</span></td>
+                                                                                                                                                                          <td><input name="typereportcap" id="typereportcap" type="radio" value="MaxData" class="style10" onclick="this.form.submit();"></td>
+                                                                                                                                                                          <td><input type="button" name="Capacity_Graph" value="GetGraph" onclick="submit_capacity_graph()" class="style10"></td>
+                                                                                                                                                                          <td><input type="button" name="ExceptionPage" value="GetExceptions" onclick="submit_exception_page()" class="style10"></td>
+                                                                                                                                                                          <td><input type="button" name="AllExceptionPage" id= "AllExceptionPage" value="SelectAll" onclick="selectAllServers(this);submit_exception_page()" class="style10"></td>
+                                                                                                                                                                        </tr>
+                                                                                                                                                                      </table>
 
-                          <table border="0" id="type_report_system" style="display: none;">
-                              <tr>
-                                  <td></td>
-                              </tr>
-                         </table>
-                        <table border="0" id="storage_capacity" style="display: none;">
-                          <tr>
-                              <td></td>
-                              <td></td>
-						      <td></td>
-						      <td><input type="button" name="GetGraph" value="GetGraph" onclick="submit_storage_graph()" class="style10"></td>
-						      <td><input type="button" name="GetMTF" value="GetMonthsToFill" onclick="submit_storage_mtf()" class="style10"></td>
-						      <td><input type="button" name="GetMTF" value="SelectAll" onclick="selectAllServers(this);submit_storage_mtf()" class="style10"></td>
-						      <td></td>
-						      <td></td>
-                            </tr>
-                         </table>
+                                                                                                                                                                      <table border="0" id="type_report_system" style="display: none;">
+                                                                                                                                                                        <tr>
+                                                                                                                                                                          <td></td>
+                                                                                                                                                                        </tr>
+                                                                                                                                                                      </table>
+                                                                                                                                                                      <table border="0" id="storage_capacity" style="display: none;">
+                                                                                                                                                                        <tr>
+                                                                                                                                                                          <td></td>
+                                                                                                                                                                          <td></td>
+                                                                                                                                                                          <td></td>
+                                                                                                                                                                          <td><input type="button" name="GetGraph" value="GetGraph" onclick="submit_storage_graph()" class="style10"></td>
+                                                                                                                                                                          <td><input type="button" name="GetMTF" value="GetMonthsToFill" onclick="submit_storage_mtf()" class="style10"></td>
+                                                                                                                                                                          <td><input type="button" name="GetMTF" value="SelectAll" onclick="selectAllServers(this);submit_storage_mtf()" class="style10"></td>
+                                                                                                                                                                          <td></td>
+                                                                                                                                                                          <td></td>
+                                                                                                                                                                        </tr>
+                                                                                                                                                                      </table>
 
-                         <table border="0" id="storage_performance" style="display: none;">
-                          <tr>
-                              <td width="66"><span class="style10">Last_Week:</span></td>
-						      <td width="20"><input name="typereportp" id="typereportp" type="radio" class="style10" value="LastWeek" onclick="this.form.datereport.value='';this.form.submit()" checked></td>
-                              <td width="88"><span class="style10">Current_month:</span></td>
-						      <td width="20"><input name="typereportp" id="typereportp" type="radio" class="style10" value="CurrentMonth" onclick="this.form.datereport.value='';this.form.submit()"></td>
-                              <td width="68" class="style10">Last_Month:</td>
-						      <td width="66"><input name="typereportp" id="typereportp" type="radio" class="style10" value="LastMonth" onclick="this.form.datereport.value='';this.form.submit()"></td>
-						      <td><input type="submit" name="Submit" value="Get Graph" class="style10"></td>
-                            </tr>
-                         </table>
-                        </div>
-                       </td>
-			        </tr>
-			        <tr>
-			          <td height="364" bgcolor="#FFFFFF"><DIV class="highlightOn" id=ServicesList>
-			                    <div align="center"><SPAN id=getting_results
-                                    style="DISPLAY: none; COLOR: red"> wait, working on it....</SPAN></div>
-                          <iframe src="" name="iframe" width="720" height="418"></iframe>
+                                                                                                                                                                      <table border="0" id="storage_performance" style="display: none;">
+                                                                                                                                                                        <tr>
+                                                                                                                                                                          <td width="66"><span class="style10">Last_Week:</span></td>
+                                                                                                                                                                          <td width="20"><input name="typereportp" id="typereportp" type="radio" class="style10" value="LastWeek" onclick="this.form.datereport.value='';this.form.submit()" checked></td>
+                                                                                                                                                                          <td width="88"><span class="style10">Current_month:</span></td>
+                                                                                                                                                                          <td width="20"><input name="typereportp" id="typereportp" type="radio" class="style10" value="CurrentMonth" onclick="this.form.datereport.value='';this.form.submit()"></td>
+                                                                                                                                                                          <td width="68" class="style10">Last_Month:</td>
+                                                                                                                                                                          <td width="66"><input name="typereportp" id="typereportp" type="radio" class="style10" value="LastMonth" onclick="this.form.datereport.value='';this.form.submit()"></td>
+                                                                                                                                                                          <td><input type="submit" name="Submit" value="Get Graph" class="style10"></td>
+                                                                                                                                                                        </tr>
+                                                                                                                                                                      </table>
+                                                                                                                                                                    </div>
+                                                                                                                                                                  </td>
+                                                                                                                                                                </tr>
+                                                                                                                                                                <tr>
+                                                                                                                                                                  <td height="364" bgcolor="#FFFFFF"><DIV class="highlightOn" id=ServicesList>
+                                                                                                                                                                      <div align="center"><SPAN id=getting_results
+                                                                                                                                                                          style="DISPLAY: none; COLOR: red"> wait, working on it....</SPAN></div>
+                                                                                                                                                                      <iframe src="" name="iframe" width="720" height="418"></iframe>
 
-                      </DIV>
-			          </td>
+                                                                                                                                                                    </DIV>
+                                                                                                                                                                  </td>
 
-				    </tr>
-				    <tr>
-				      <td bgcolor="#C5CAD9"><table width="669" border="0" bordercolor="#FFFFFF">
-                         <% if @global_table %>
-                            <tr id="performance_metrics">
-                         <% else %>
-                            <tr id="performance_metrics" style="display: none;">
-                         <% end %>
-                            <% @first = true; %>
-                             <% for metric in @metrics %>
-                                <td class="style10"><%= metric.showname %></td><td class="style10"><% if @first %><input name="<%= metric.name %>" id="<%= metric.name %>" type="checkbox" class="style10" onclick="this.form.submit();" checked >
-                                        <% @first = false %>
-                                    <% else %>
-                                        <input name="<%= metric.name %>" id="<%= metric.name %>" type="checkbox" class="style10" onclick="this.form.submit();">
-                                    <% end %>
-                                </td>
-                             <% end %>
-                           </tr>
-                             <% if @capacity_table and !@global_table %>
-                                <tr id="capacity_metrics" style="display: block;">
-                              <% else %>
-                                <tr id="capacity_metrics" style="display: none;">
-                              <% end %>
-                            <td class="style10">Cpu_Usage_Forecast<input name="metric" id="mectric" type="radio" value="CpuForecast" class="style10" onclick="this.form.submit();" checked></td>
-                            <td class="style10">Cpu_Usage<input name="metric" id="mectric" type="radio" value="CpuUsage" class="style10" onclick="this.form.submit();"></td>
-                            <td class="style10">Mem_Usage_Forecast<input name="metric" id="mectric" type="radio" value="MemForecast" class="style10" onclick="this.form.submit();"></td>
-                            <td class="style10">Mem_Usage<input name="metric" id="mectric" type="radio" value="MemUsage" class="style10" onclick="this.form.submit();"></td>
-                            <td class="style10">Paging<input name="metric" id="mectric" type="radio" value="Paging" class="style10" onclick="this.form.submit();"></td>
-                            <td class="style10">I/O<input name="metric" id="mectric" type="radio" value="Iometric" class="style10" onclick="this.form.submit();"></td>
-                            <td class="style10">SwapSpace<input name="metric" id="mectric" type="radio" value="SwapSpace" class="style10" onclick="this.form.submit();"></td>
-                           </tr>
+                                                                                                                                                                </tr>
+                                                                                                                                                                <tr>
+                                                                                                                                                                  <td bgcolor="#C5CAD9"><table width="669" border="0" bordercolor="#FFFFFF">
+                                                                                                                                                                      <% if @global_table %>
+                                                                                                                                                                        <tr id="performance_metrics">
+                                                                                                                                                                      <% else %>
+                                                                                                                                                                          <tr id="performance_metrics" style="display: none;">
+                                                                                                                                                                        <% end %>
+                                                                                                                                                                          <% @first = true; %>
+                                                                                                                                                                          <% for metric in @metrics %>
+                                                                                                                                                                            <td class="style10"><%= metric.showname %></td><td class="style10"><% if @first %><input name="<%= metric.name %>" id="<%= metric.name %>" type="checkbox" class="style10" onclick="this.form.submit();" checked >
+                                                                                                                                                                              <% @first = false %>
+                                                                                                                                                                          <% else %>
+                                                                                                                                                                              <input name="<%= metric.name %>" id="<%= metric.name %>" type="checkbox" class="style10" onclick="this.form.submit();">
+                                                                                                                                                                          <% end %>
+                                                                                                                                                                          </td>
+                                                                                                                                                                        <% end %>
+                                                                                                                                                                        </tr>
+                                                                                                                                                                        <% if @capacity_table and !@global_table %>
+                                                                                                                                                                          <tr id="capacity_metrics" style="display: block;">
+                                                                                                                                                                        <% else %>
+                                                                                                                                                                            <tr id="capacity_metrics" style="display: none;">
+                                                                                                                                                                          <% end %>
+                                                                                                                                                                            <td class="style10">Cpu_Usage_Forecast<input name="metric" id="mectric" type="radio" value="CpuForecast" class="style10" onclick="this.form.submit();" checked></td>
+                                                                                                                                                                            <td class="style10">Cpu_Usage<input name="metric" id="mectric" type="radio" value="CpuUsage" class="style10" onclick="this.form.submit();"></td>
+                                                                                                                                                                            <td class="style10">Mem_Usage_Forecast<input name="metric" id="mectric" type="radio" value="MemForecast" class="style10" onclick="this.form.submit();"></td>
+                                                                                                                                                                            <td class="style10">Mem_Usage<input name="metric" id="mectric" type="radio" value="MemUsage" class="style10" onclick="this.form.submit();"></td>
+                                                                                                                                                                            <td class="style10">Paging<input name="metric" id="mectric" type="radio" value="Paging" class="style10" onclick="this.form.submit();"></td>
+                                                                                                                                                                            <td class="style10">I/O<input name="metric" id="mectric" type="radio" value="Iometric" class="style10" onclick="this.form.submit();"></td>
+                                                                                                                                                                            <td class="style10">SwapSpace<input name="metric" id="mectric" type="radio" value="SwapSpace" class="style10" onclick="this.form.submit();"></td>
+                                                                                                                                                                          </tr>
 
-                           <tr id="storage_metrics" style="display: none;">
-                           <td class="style10">Storage_Forecast<input name="storage_metric" id="storage_mectric" type="radio" value="forecast" class="style10" onclick="submit_storage_graph_drop_list();" checked></td>
-                           <td class="style10">Storage_Usage_Mb<input name="storage_metric" id="storage_metric" type="radio" value="mbusage" class="style10" onclick="submit_storage_graph_drop_list();"></td>
-                           <td class="style10">Storage_Usage_Pct<input name="storage_metric" id="storage_metric" type="radio" value="pctusage" class="style10" onclick="submit_storage_graph_drop_list();"></td>
-                           </tr>
+                                                                                                                                                                          <tr id="storage_metrics" style="display: none;">
+                                                                                                                                                                            <td class="style10">Storage_Forecast<input name="storage_metric" id="storage_mectric" type="radio" value="forecast" class="style10" onclick="submit_storage_graph_drop_list();" checked></td>
+                                                                                                                                                                            <td class="style10">Storage_Usage_Mb<input name="storage_metric" id="storage_metric" type="radio" value="mbusage" class="style10" onclick="submit_storage_graph_drop_list();"></td>
+                                                                                                                                                                            <td class="style10">Storage_Usage_Pct<input name="storage_metric" id="storage_metric" type="radio" value="pctusage" class="style10" onclick="submit_storage_graph_drop_list();"></td>
+                                                                                                                                                                          </tr>
 
-                           <tr id="storage_perf_metrics" style="display: none;">
-                           <td class="style10">Mb Graphs<input name="storage_perf_metric" id="storage_perf_mectric" type="radio" value="mbgraph" class="style10" onclick="this.form.submit();" checked></td>
-                           <td class="style10">Pct Graphs<input name="storage_perf_metric" id="storage_perf_metric" type="radio" value="pctgraph" class="style10" onclick="this.form.submit();"></td>
-                           </tr>
+                                                                                                                                                                          <tr id="storage_perf_metrics" style="display: none;">
+                                                                                                                                                                            <td class="style10">Mb Graphs<input name="storage_perf_metric" id="storage_perf_mectric" type="radio" value="mbgraph" class="style10" onclick="this.form.submit();" checked></td>
+                                                                                                                                                                            <td class="style10">Pct Graphs<input name="storage_perf_metric" id="storage_perf_metric" type="radio" value="pctgraph" class="style10" onclick="this.form.submit();"></td>
+                                                                                                                                                                          </tr>
 
-                           <tr id="system_metrics" style="display: none;">
-                            <td>&nbsp; </td>
-                            <!-- <td>System Information for </td>
+                                                                                                                                                                          <tr id="system_metrics" style="display: none;">
+                                                                                                                                                                            <td>&nbsp; </td>
+                                                                                                                                                                            <!-- <td>System Information for </td>
                             <td>Server</td>
                             <td> Name</td>
                             <td>Name 1</td>-->
-                           </tr>
-                      </table></td>
-				    </tr>
-			      </table>
-            </div></td>
-     		</form>
-     		<SCRIPT language=javascript type=text/javascript>
-     		     document.GetGraph.datereport.value = this.value=formatDate(d,'yyyy-MM-dd');
-     		     document.GetGraph.submit();
+                                                                                                                                                                          </tr>
+                                                                                                                                                                      </table></td>
+                                                                                                                                                                    </tr>
+                                                                                                                                                                  </table>
+                                                                                                                                                              </div></td>
+                                                                                                                                                            </form>
+                                                                                                                                                            <SCRIPT language=javascript type=text/javascript>
+document.GetGraph.datereport.value = this.value=formatDate(d,'yyyy-MM-dd');
+document.GetGraph.submit();
 
-     		</script>
-	</tr>
-	</table>
-	</TD>
-  </TR>
-  <TR>
-    <TD bgcolor="#FFFFFF">
-      <DIV id=footer>
-        <div align="center">
-          <TABLE width="413" border=0 cellPadding=0 cellSpacing=0 class="footer">
-              <TBODY>
-            <TR>
-                  <TD width="379" align=middle class=footer><div align="center"><A
-            href="http://www.hp.com/" class="footer">HP.com</A>&nbsp;&nbsp;|&nbsp;&nbsp;<A
-            class=footer
-            href="#">Privacy Policy</A>&nbsp;&nbsp;|&nbsp;&nbsp;<A
-            href="http://h30067.www3.hp.com/login.asp?action=logout&amp;navcon_id=&amp;redirectCount=0#">Terms of Use</A> &nbsp;&nbsp;|&nbsp;&nbsp;<A
-            href="#">Site Feedback</A></div></TD>
-                </TR>
-                <TR>
-                  <TD align=middle class=footer><div align="center">&#169 1994 - <%= Time.now.year %> Hewlett-Packard Company</div></TD>
-                </TR>
-              </TBODY>
-          </TABLE>
-        </div>
-  </DIV></TD></TR></TBODY></TABLE>
-</center>
-</BODY></HTML>
+                                                                                                                                                            </script>
+                                                                                                                                                          </tr>
+                                                                                                                                                        </table>
+                                                                                                                                                      </TD>
+                                                                                                                                                    </TR>
+                                                                                                                                                    <TR>
+                                                                                                                                                      <TD bgcolor="#FFFFFF">
+                                                                                                                                                        <DIV id=footer>
+                                                                                                                                                          <div align="center">
+                                                                                                                                                            <TABLE width="413" border=0 cellPadding=0 cellSpacing=0 class="footer">
+                                                                                                                                                              <TBODY>
+                                                                                                                                                              <TR>
+                                                                                                                                                                <TD width="379" align=middle class=footer><div align="center"><A
+                                                                                                                                                                      href="http://www.hp.com/" class="footer">HP.com</A>&nbsp;&nbsp;|&nbsp;&nbsp;<A
+                                                                                                                                                                      class=footer
+                                                                                                                                                                      href="#">Privacy Policy</A>&nbsp;&nbsp;|&nbsp;&nbsp;<A
+                                                                                                                                                                      href="http://h30067.www3.hp.com/login.asp?action=logout&amp;navcon_id=&amp;redirectCount=0#">Terms of Use</A> &nbsp;&nbsp;|&nbsp;&nbsp;<A
+                                                                                                                                                                      href="#">Site Feedback</A></div></TD>
+                                                                                                                                                              </TR>
+                                                                                                                                                              <TR>
+                                                                                                                                                                <TD align=middle class=footer><div align="center">&#169 1994 - <%= Time.now.year %> Hewlett-Packard Company</div></TD>
+                                                                                                                                                              </TR>
+                                                                                                                                                              </TBODY>
+                                                                                                                                                            </TABLE>
+                                                                                                                                                          </div>
+                                                                                                                                                  </DIV></TD></TR></TBODY></TABLE>
+                                                                                                                                                </center>
+                                                                                                                                                </BODY></HTML>

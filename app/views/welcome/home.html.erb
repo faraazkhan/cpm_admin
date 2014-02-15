@@ -1,8 +1,7 @@
 <div class="well content-well" >
-  <% if @internal %>
-  <%= render 'internal' %>
-<% else %>
-    rendering clients view
-  <%= render 'client' %>
-<% end %>
+  <% if @client.services.present? %>
+    <%= render 'services' %>
+  <% else %>
+    <p> This client has no Services yet. </p>
+  <% end %>
 </div>

@@ -1,0 +1,1 @@
+name,descriptionadmin,An HP internal role that has permissions to view/edit/delete all pages in the applicationmanager,An HP internal role that has permission to view all pages for all clientsclient,An external role that only has permissions to view reports for a specific client
